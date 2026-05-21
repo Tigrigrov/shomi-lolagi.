@@ -89,33 +89,69 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   .acn{padding:10px}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+<script>
+function saveData(){
+  try {
+    var data = {
+      orders: orders, dishes: dishes, cats: cats, tables: tables,
+      staffList: staffList, promosList: promosList, bankCards: bankCards,
+      waiterCalls: waiterCalls, bannerImg: bannerImg, bannerHeight: bannerHeight,
+      restSettings: restSettings, ordCnt: ordCnt, idCnt: idCnt
+    };
+    localStorage.setItem('shomi_data', JSON.stringify(data));
+  } catch(e) { console.warn('Save error:', e); }
+}
+function loadData(){
+  try {
+    var raw = localStorage.getItem('shomi_data');
+    if(!raw) return;
+    var d = JSON.parse(raw);
+    if(d.orders) orders = d.orders;
+    if(d.dishes) dishes = d.dishes;
+    if(d.cats) cats = d.cats;
+    if(d.tables) tables = d.tables;
+    if(d.staffList) staffList = d.staffList;
+    if(d.promosList) promosList = d.promosList;
+    if(d.bankCards) bankCards = d.bankCards;
+    if(d.waiterCalls) waiterCalls = d.waiterCalls;
+    if(d.bannerImg) bannerImg = d.bannerImg;
+    if(d.bannerHeight) bannerHeight = d.bannerHeight;
+    if(d.restSettings) Object.assign(restSettings, d.restSettings);
+    if(d.ordCnt) ordCnt = d.ordCnt;
+    if(d.idCnt) idCnt = d.idCnt;
+  } catch(e) { console.warn('Load error:', e); }
+}
+</script>
+
 </head>
 <body>
 <div id="toasts"></div>
 
 <div class="mbg" id="m-staff">
   <div class="mbox" style="max-width:330px">
-    <div class="mh"><h3>🔑 Кормандон</h3><button class="mcl" onclick="CM('m-staff')">×</button></div>
+    <div class="mh"><h3>🔑 Даромадан ба система</h3><button class="mcl" onclick="CM('m-staff')">×</button></div>
     <div class="mb" style="text-align:center">
-      <div style="font-size:38px;margin-bottom:8px">🍽</div>
-      <div style="font-size:15px;font-weight:900;color:#f5c518;margin-bottom:18px">Шоми Лолагӣ</div>
-      <div id="sl-err" style="display:none;background:#3d0000;border:1px solid #ef4444;border-radius:8px;padding:8px;font-size:11px;color:#f87171;margin-bottom:10px">❌ Парол нодуруст!</div>
+      <div style="font-size:42px;margin-bottom:6px">🍽</div>
+      <div style="font-size:16px;font-weight:900;color:#f5c518;margin-bottom:5px">Шоми Лолагӣ</div>
+      <div style="font-size:11px;color:#8b949e;margin-bottom:16px">Бо логин ва пароли худ дароед</div>
+      <div id="sl-err" style="display:none;background:#3d0000;border:1px solid #ef4444;border-radius:8px;padding:9px;font-size:11px;color:#f87171;margin-bottom:10px">❌ Логин ё парол нодуруст!</div>
       <div class="fg" style="text-align:left">
-        <label class="lbl">Нақш</label>
-        <select id="sl-role" class="inp">
-          <option value="admin">👑 Admin</option>
-          <option value="kitchen">👨‍🍳 Ошпаз</option>
-          <option value="waiter">🛎 Афитсиант</option>
-          <option value="cashier">💰 Хазиначи</option>
-          <option value="courier">🚗 Курьер</option>
-        </select>
+        <label class="lbl">👤 Логин</label>
+        <input type="text" id="sl-login" class="inp" placeholder="davlat" autocomplete="off">
       </div>
       <div class="fg" style="text-align:left">
-        <label class="lbl">Парол</label>
+        <label class="lbl">🔒 Парол</label>
         <input type="password" id="sl-pass" class="inp" placeholder="••••••" onkeypress="if(event.key==='Enter')sLogin()">
       </div>
-      <button onclick="sLogin()" class="btn bg bfull">🔑 Даромадан</button>
-      <div style="margin-top:10px;font-size:10px;color:#555">admin2024 · kitchen2024 · waiter2024 · cashier2024 · courier2024</div>
+      <button onclick="sLogin()" class="btn bg bfull" style="padding:13px;font-size:14px">🔑 Даромадан</button>
+      <div style="margin-top:14px;padding:9px;background:#0d1117;border-radius:8px;font-size:10px;color:#8b949e;text-align:left">
+        <div style="font-weight:900;color:#f5c518;margin-bottom:5px">💡 Логинҳои тестӣ:</div>
+        <div>👑 Admin: <span style="color:#f5c518">admin</span> / admin2024</div>
+        <div>👨‍🍳 Ошпаз: <span style="color:#f5c518">nilufer</span> / nilufer123</div>
+        <div>🛎 Афитсиант: <span style="color:#f5c518">davlat</span> / davlat123</div>
+        <div>💰 Хазиначи: <span style="color:#f5c518">bahrom</span> / bahrom123</div>
+      </div>
     </div>
   </div>
 </div>
@@ -239,6 +275,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="fg"><label class="lbl">Телефон</label><input type="text" id="rs-ph" class="inp" placeholder="+992 900 00 00 00"></div>
         <div class="fg"><label class="lbl">Суроға</label><input type="text" id="rs-ad" class="inp" placeholder="Душанбе"></div>
       </div>
+      <div style="font-size:11px;color:#f5c518;font-weight:900;margin-bottom:7px;margin-top:8px">🤖 Telegram Bot (барои огоҳиҳо)</div>
+      <div style="background:#0c1a30;border:1px solid #3b82f6;border-radius:9px;padding:11px;margin-bottom:10px;font-size:10px;color:#60a5fa">
+        <div style="font-weight:900;margin-bottom:6px">💡 Чӣ тавр Telegram Bot сохтан?</div>
+        <div>1. Telegram-да @BotFather кушоед</div>
+        <div>2. /newbot нависед</div>
+        <div>3. Номи бот: <b>ShomiLolagiBot</b></div>
+        <div>4. Token гирифтед — ин ҷо нависед</div>
+        <div style="margin-top:5px">5. @userinfobot кушоед → ID-и худро гиред</div>
+      </div>
+      <div class="fg"><label class="lbl">🤖 Bot Token</label><input type="text" id="rs-bt" class="inp" placeholder="123456:ABC-DEF1234ghI..." autocomplete="off"></div>
+      <div class="fg"><label class="lbl">👑 Admin Telegram ID</label><input type="text" id="rs-ai" class="inp" placeholder="123456789"></div>
+      <button onclick="testTelegram()" class="btn bb bsm bfull" style="margin-top:5px">🧪 Санҷидани Telegram</button>
     </div>
     <div class="mf">
       <button class="btn bgy bsm" onclick="CM('m-restset')">Бекор</button>
@@ -566,6 +614,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <div class="sc"><div class="l">✅ Пардохт</div><div class="v" style="color:#f5c518" id="d-paid">0</div></div>
           <div class="sc"><div class="l">⏳ Интизор</div><div class="v" style="color:#ef4444" id="d-wait">0</div></div>
         </div>
+        <div class="card"><div class="card-h"><h3>🏆 Топ-5 таомҳои маҳбуб</h3></div>
+          <div class="card-b" id="top-dishes"></div>
+        </div>
+        <div class="card"><div class="card-h"><h3>💳 Усулҳои пардохт</h3></div>
+          <div class="card-b" id="pm-stats"></div>
+        </div>
         <div class="card"><div class="card-h"><h3>🔥 Охирин заказҳо</h3></div>
         <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>№</th><th>Навъ</th><th>Маблағ</th><th>Усул</th><th>Пардохт</th><th>Статус</th></tr></thead><tbody id="d-tbl"></tbody></table></div></div>
       </div>
@@ -575,7 +629,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
       <div class="apg" id="ap-history">
         <div class="card"><div class="card-h"><h3>📜 История (Заказҳои тамомшуда)</h3><span class="badge b-g" id="h-cnt">0</span></div>
-        <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>№</th><th>Вақт</th><th>Навъ</th><th>Таом</th><th>Маблағ</th><th>Усул</th><th>Расонид</th></tr></thead><tbody id="h-tbl"></tbody></table></div>
+        <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>№</th><th>Вақт</th><th>Навъ</th><th>Таом</th><th>Маблағ</th><th>Усул</th><th>Расонид</th><th>Чек</th></tr></thead><tbody id="h-tbl"></tbody></table></div>
         <div style="padding:11px 13px;border-top:2px solid #f5c518;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:900;flex-wrap:wrap;gap:8px"><span>ҶАМЪ:</span><span style="color:#f5c518" id="h-total">0 сом</span><button onclick="clearHistory()" class="btn br bsm">🗑 Историяро тоза кардан</button></div>
         </div>
       </div>
@@ -595,8 +649,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div id="c-list"></div></div>
       </div>
       <div class="apg" id="ap-tables">
-        <div class="card"><div class="card-h"><h3>🪑 Мизҳо</h3><button onclick="OM('m-addtbl')" class="btn bg bsm">➕</button></div>
-        <div style="padding:11px;display:grid;grid-template-columns:repeat(auto-fill,minmax(75px,1fr));gap:7px" id="t-grid"></div></div>
+        <div class="card">
+          <div class="card-h"><h3>🪑 Мизҳо</h3>
+            <div style="display:flex;gap:5px">
+              <button onclick="printAllQR()" class="btn bb bsm">🖨 Чопи QR ҳамаи мизҳо</button>
+              <button onclick="OM('m-addtbl')" class="btn bg bsm">➕</button>
+            </div>
+          </div>
+          <div style="padding:11px;display:grid;grid-template-columns:repeat(auto-fill,minmax(75px,1fr));gap:7px" id="t-grid"></div>
+        </div>
+        <div class="card" style="margin-top:11px">
+          <div class="card-h"><h3>📱 QR-кодҳои мизҳо</h3></div>
+          <div style="padding:11px;font-size:11px;color:#8b949e">
+            💡 Ҳар миз як QR-код дорад. Мизоҷ скан мекунад → саҳифа кушода мешавад → рақами миз худкор сабт мешавад
+          </div>
+          <div style="padding:11px;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:11px" id="qr-grid"></div>
+        </div>
       </div>
       <div class="apg" id="ap-staff">
         <div class="card"><div class="card-h"><h3>👥 Кормандон</h3><button onclick="OM('m-addstaff')" class="btn bg bsm">➕</button></div>
@@ -672,7 +740,9 @@ var restSettings = {
   tagline_en: '🍽 Tajikistan · Tajik and European cuisine',
   hours: '10:00-23:00',
   phone: '+992 900 00 00 00',
-  address: 'Душанбе, Тоҷикистон'
+  address: 'Душанбе, Тоҷикистон',
+  telegramBotToken: '',
+  telegramAdminChatId: ''
 };
 
 // UTILS
@@ -805,28 +875,56 @@ function applyLang(){
 }
 
 // AUTH
+// Default admin accounts (for first login)
+var defaultLogins = {
+  'admin': {pass:'admin2024', role:'admin', name:'👑 Admin'},
+  'kassir': {pass:'kassir2024', role:'cashier', name:'💰 Хазиначи'},
+  'oshpaz': {pass:'oshpaz2024', role:'kitchen', name:'👨‍🍳 Ошпаз'},
+  'official': {pass:'ofical2024', role:'waiter', name:'🛎 Афитсиант'},
+  'kuryer': {pass:'kuryer2024', role:'courier', name:'🚗 Курьер'}
+};
+
 function sLogin(){
-  var role=document.getElementById('sl-role').value;
+  var login=document.getElementById('sl-login').value.trim().toLowerCase();
   var pass=document.getElementById('sl-pass').value;
   var err=document.getElementById('sl-err');
-  var staff=staffList.find(function(s){return s.role===role && s.pass===pass;});
-  var roleOk=ROLE_PASS[role]===pass;
-  if(staff||roleOk){
+  // 1. Check staff list (individual accounts)
+  var staff=staffList.find(function(s){return s.login&&s.login.toLowerCase()===login&&s.pass===pass;});
+  // 2. Check default logins (system accounts)
+  var defLogin=defaultLogins[login];
+  var defOk=defLogin&&defLogin.pass===pass;
+  if(staff){
     err.style.display='none';
+    document.getElementById('sl-login').value='';
     document.getElementById('sl-pass').value='';
     CM('m-staff');
-    currentRole=role;
-    currentStaff=staff||{name:role,role:role};
-    if(role==='admin'){SP('admin');rAdmAll();}
-    else if(role==='kitchen'){SP('kitchen');renderKitchen();}
-    else if(role==='waiter'){SP('waiter');var w=document.getElementById('wn');if(w)w.textContent=currentStaff.name;renderWaiter();}
-    else if(role==='cashier'){SP('cashier');renderCashier();}
-    else if(role==='courier'){SP('courier');var c=document.getElementById('crn');if(c)c.textContent=currentStaff.name;renderCourier();}
-    toast('✅ Хуш омадед, '+currentStaff.name+'!');
+    currentRole=staff.role;
+    currentStaff=staff;
+    enterRole(staff.role);
+    toast('✅ Хуш омадед, '+staff.name+'!','g');
+    // Send Telegram notification
+    sendTelegramToStaff(staff,'🔑 Шумо ба система дохил шудед\n⏰ '+now());
+  } else if(defOk){
+    err.style.display='none';
+    document.getElementById('sl-login').value='';
+    document.getElementById('sl-pass').value='';
+    CM('m-staff');
+    currentRole=defLogin.role;
+    currentStaff={name:defLogin.name,role:defLogin.role,login:login};
+    enterRole(defLogin.role);
+    toast('✅ Хуш омадед, '+defLogin.name+'!','g');
   } else {
     err.style.display='block';
     document.getElementById('sl-pass').value='';
   }
+}
+
+function enterRole(role){
+  if(role==='admin'){SP('admin');rAdmAll();}
+  else if(role==='kitchen'){SP('kitchen');renderKitchen();}
+  else if(role==='waiter'){SP('waiter');var w=document.getElementById('wn');if(w)w.textContent=currentStaff.name;renderWaiter();}
+  else if(role==='cashier'){SP('cashier');renderCashier();}
+  else if(role==='courier'){SP('courier');var c=document.getElementById('crn');if(c)c.textContent=currentStaff.name;renderCourier();}
 }
 function logout(){currentRole='customer';currentStaff=null;SP('customer');toast('👋','b');}
 
@@ -932,6 +1030,9 @@ function doCallWaiter(){
     assignedAt:null
   };
   waiterCalls.unshift(call);
+  // Send Telegram to all waiters
+  var callMsg='🛎 <b>Афитсиант даъват шуд!</b>\n\n🪑 Миз №'+t+'\n'+call.reasonLabel+'\n⏰ '+call.time;
+  sendTelegramToAllStaff('waiter', callMsg);
   CM('m-callwaiter');
   document.getElementById('cw-tbl').value='';
   // Notify waiter panel
@@ -1037,6 +1138,31 @@ function doFinalize(otype,tblNum,adr,subtot,final,method,items){
     waiter:null,courier:null
   };
   orders.unshift(o);
+  // Send Telegram notifications
+  var orderInfo='🆕 <b>Заказ нав №'+oid+'</b>\n';
+  orderInfo+='⏰ '+o.time+'\n';
+  if(otype==='dine_in')orderInfo+='🪑 Миз №'+tblNum+'\n';
+  else if(otype==='delivery')orderInfo+='🚗 Доставка: '+adr+'\n';
+  else orderInfo+='🏃 Pickup\n';
+  orderInfo+='\n<b>Таомҳо:</b>\n';
+  Object.values(items).forEach(function(i){
+    orderInfo+='• '+i.name+' ×'+i.qty+' = '+(i.price*i.qty).toLocaleString()+' сом\n';
+  });
+  orderInfo+='\n💰 <b>ҶАМЪ: '+final.toLocaleString()+' сом</b>';
+  // Notify kitchen
+  sendTelegramToAllStaff('kitchen', '👨‍🍳 <b>Ошхона</b>\n\n'+orderInfo);
+  // Notify waiters for dine_in/pickup
+  if(otype!=='delivery'){
+    sendTelegramToAllStaff('waiter', '🛎 <b>Афитсиант</b>\n\n'+orderInfo);
+  }
+  // Notify couriers for delivery
+  if(otype==='delivery'){
+    sendTelegramToAllStaff('courier', '🚗 <b>Курьер</b>\n\n'+orderInfo);
+  }
+  // Notify cashier
+  sendTelegramToAllStaff('cashier', '💰 <b>Хазиначи</b>\n\n'+orderInfo);
+  // Notify admin
+  sendTelegramToAdmin(orderInfo);
   document.getElementById('suc-num').textContent=T('tnum')+oid;
   document.getElementById('suc-tot').textContent=final.toLocaleString()+' '+T('sole');
   var infoMap={dine_in:T('tabletp')+tblNum,delivery:'🚗 '+adr,pickup:T('pickup')};
@@ -1130,7 +1256,16 @@ function kAll(id){var o=orders.find(function(x){return x.id===id;});if(!o)return
 function kSt(id,k){var o=orders.find(function(x){return x.id===id;});if(!o)return;o.items[k].status='cooking';if(o.status==='new')o.status='cooking';renderKitchen();toast('👨‍🍳 '+o.items[k].name,'y');}
 function kRd(id,k){var o=orders.find(function(x){return x.id===id;});if(!o)return;o.items[k].status='ready';renderKitchen();renderWaiter();toast('✅ '+o.items[k].name);}
 function kUn(id,k){var o=orders.find(function(x){return x.id===id;});if(!o)return;var nm=o.items[k].name;var did=o.items[k].did;o.items[k].status='unavail';if(did){var d=dishes.find(function(x){return x.id===did;});if(d)d.avail=false;}renderKitchen();renderCustomer(curCat);toast('❌ '+nm+' аз меню!','r');}
-function kFin(id){var o=orders.find(function(x){return x.id===id;});if(!o)return;o.status='ready';o.readyAt=now();renderKitchen();renderWaiter();renderCourier();toast('✅ №'+id+' тайёр! Афитсиант хабар гирифт!');}
+function kFin(id){
+  var o=orders.find(function(x){return x.id===id;});if(!o)return;
+  o.status='ready';o.readyAt=now();
+  // Notify waiter/courier
+  var msg='✅ <b>Заказ тайёр шуд!</b>\n\n📋 №'+id+'\n⏰ '+o.readyAt+'\n'+(o.otype==='delivery'?'🚗 Доставка':o.otype==='dine_in'?'🪑 Миз №'+o.table:'🏃 Pickup');
+  if(o.otype==='delivery'){sendTelegramToAllStaff('courier', msg);}
+  else {sendTelegramToAllStaff('waiter', msg);}
+  renderKitchen();renderWaiter();renderCourier();
+  toast('✅ №'+id+' тайёр! Афитсиант хабар гирифт!');
+}
 
 // ════════════════════════════════════
 // WAITER — handles dine_in/pickup orders. Sees orders regardless of payment.
@@ -1283,6 +1418,8 @@ function wTc(id){
   c.assignedTo=currentStaff?currentStaff.name:'Афитсиант';
   c.assignedAt=now();
   c.status='taken';
+  // Notify admin
+  sendTelegramToAdmin('🛎 Даъват қабул шуд: <b>'+c.assignedTo+'</b> → Миз №'+c.table);
   renderWaiter();
   toast('✅ Миз №'+c.table+' — меравам!','g');
 }
@@ -1355,10 +1492,11 @@ function renderCashier(){
     Object.values(o.items).forEach(function(i){items+='<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:11px"><span>'+i.name+' ×'+i.qty+'</span><span style="color:#f5c518">'+(i.price*i.qty).toLocaleString()+'</span></div>';});
     var statusBox='';
     if(o.paid){
-      statusBox='<div style="background:#052e16;border:1px solid #22c55e;border-radius:9px;padding:11px;display:flex;align-items:center;justify-content:space-between;gap:8px">'
+      statusBox='<div style="background:#052e16;border:1px solid #22c55e;border-radius:9px;padding:11px;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px">'
         +'<div><div style="font-size:13px;font-weight:900;color:#22c55e">✅ Пардохт қабул шуд!</div>'
         +'<div style="font-size:10px;color:#8b949e;margin-top:2px">'+(o.paidAt||o.time)+' · '+(ml[o.method]||'')+'</div></div>'
-        +'<span style="font-size:24px">'+(mi[o.method]||'✅')+'</span></div>';
+        +'<span style="font-size:24px">'+(mi[o.method]||'✅')+'</span></div>'
+        +'<button onclick="printReceipt('+o.id+')" class="btn bb bfull">🖨 Чопи чек</button>';
     } else {
       // Big confirm button - one tap to confirm payment
       var hint=o.paymentClaimed
@@ -1380,15 +1518,49 @@ function renderCashier(){
   });
   el.innerHTML=html;
 }
+function printReceipt(id){
+  var o=orders.find(function(x){return x.id===id;});if(!o)return;
+  var ml={cash:'Накдӣ',card:'Карта',qr:'QR'};
+  var w=window.open('','_blank');
+  var html='<!DOCTYPE html><html><head><title>Чек №'+id+'</title>'
+    +'<style>body{font-family:monospace;width:280px;margin:10px auto;padding:10px;font-size:12px}h2{text-align:center;font-size:16px;margin:5px 0}.line{border-top:1px dashed #000;margin:8px 0}.row{display:flex;justify-content:space-between;margin:3px 0}.total{font-size:14px;font-weight:900;border-top:2px solid #000;padding-top:5px;margin-top:5px}@media print{body{margin:0}}</style></head><body>'
+    +'<h2>🍽 '+restSettings.name+'</h2>'
+    +'<div style="text-align:center;font-size:10px">'+restSettings.address+'</div>'
+    +'<div style="text-align:center;font-size:10px">'+restSettings.phone+'</div>'
+    +'<div class="line"></div>'
+    +'<div class="row"><span>Чек №:</span><b>'+o.id+'</b></div>'
+    +'<div class="row"><span>Сана:</span><span>'+new Date().toLocaleDateString()+' '+o.time+'</span></div>'
+    +(o.otype==='dine_in'?'<div class="row"><span>Миз:</span><b>№'+o.table+'</b></div>':'')
+    +(o.otype==='delivery'?'<div class="row"><span>Доставка:</span><span style="font-size:10px">'+o.addr+'</span></div>':'')
+    +'<div class="line"></div>';
+  Object.values(o.items).forEach(function(i){
+    html+='<div style="margin:4px 0"><div>'+i.name+'</div><div class="row" style="font-size:11px"><span>'+i.price.toLocaleString()+' × '+i.qty+'</span><b>'+(i.price*i.qty).toLocaleString()+'</b></div></div>';
+  });
+  html+='<div class="line"></div>'
+    +'<div class="row total"><span>ҶАМЪ:</span><b>'+o.total.toLocaleString()+' сом</b></div>'
+    +'<div class="row"><span>Усул:</span><b>'+(ml[o.method]||'')+'</b></div>'
+    +'<div class="row"><span>Статус:</span><b style="color:green">✓ Пардохт</b></div>'
+    +'<div class="line"></div>'
+    +'<div style="text-align:center;margin-top:10px;font-size:11px">Ташаккур барои интихоб!</div>'
+    +'<div style="text-align:center;font-size:9px;margin-top:5px">'+o.paidBy+'</div>'
+    +'</body></html>';
+  w.document.write(html);
+  setTimeout(function(){w.print();},500);
+}
+
 function payConfirm(id){
   var o=orders.find(function(x){return x.id===id;});if(!o)return;
   o.paid=true;
   o.paidAt=now();
   o.paidBy=currentStaff?currentStaff.name:'Хазиначи';
+  // Telegram notify
+  var msg='✅ <b>Пардохт қабул шуд!</b>\n\n📋 Заказ №'+id+'\n💰 '+o.total.toLocaleString()+' сом\n💳 '+({cash:'💵 Накдӣ',card:'💳 Карта',qr:'📱 QR'}[o.method]||'')+'\n👤 Хазиначи: '+o.paidBy+'\n⏰ '+o.paidAt;
+  sendTelegramToAllStaff('waiter', msg);
+  sendTelegramToAllStaff('courier', msg);
+  sendTelegramToAdmin(msg);
   renderCashier();renderWaiter();renderKitchen();renderCourier();
   if(currentRole==='admin')rAdmAll();
   toast('✅ №'+id+' — пардохт қабул шуд!','g');
-  toast('🛎 Афитсиант: №'+id+' пардохт шуд!','b');
 }
 
 // ════════════════════════════════════
@@ -1442,557 +1614,4 @@ function renderCourier(){
     return;
   }
   var all=mineAct.concat(pending).concat(mineDone.slice(0,3));
-  var el=document.getElementById('courier-list');
-  if(!all.length){el.innerHTML='<div style="text-align:center;padding:35px;color:#555">🚗 Доставка нест</div>';return;}
-  var html='';
-  all.forEach(function(o){
-    var isMine=o.courier===myName;
-    var bC=o.status==='delivered'?'#22c55e':isMine?'#f59e0b':'#3b82f6';
-    var pB=o.paid?'<span class="badge b-g">✅ Пардохт</span>':'<span class="badge b-r">⏳ Пардохт нест</span>';
-    var sB={new:'<span class="badge b-bl">🆕 Нав</span>',cooking:'<span class="badge b-y">👨‍🍳 Пухта</span>',ready:'<span class="badge b-g">✅ Тайёр</span>',delivering:'<span class="badge b-y">🚗 Роҳда</span>',delivered:o.paid?'<span class="badge b-g">✅ Расонида</span>':'<span class="badge b-y">✅ Расонида — пардохт интизор</span>'}[o.status]||'';
-    var items='';
-    Object.values(o.items).forEach(function(i){items+='<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:11px"><span>'+i.name+' ×'+i.qty+'</span><span style="color:#f5c518">'+(i.price*i.qty).toLocaleString()+'</span></div>';});
-    var btns=[];
-    if(!isMine&&o.status!=='delivered'){
-      btns.push('<button onclick="crT('+o.id+')" class="btn bg bsm">✋ Ман мегирам</button>');
-    }
-    // Show "Гирифтам - Расонидам" button ONLY when order is READY
-    if(isMine&&o.status==='ready'){
-      btns.push('<button onclick="crFinish('+o.id+')" style="background:#22c55e;color:#000;border:none;padding:12px;border-radius:9px;font-size:13px;font-weight:900;cursor:pointer;font-family:inherit;width:100%">📦 Гирифтам — Расонидам!</button>');
-    }
-    // While cooking - show waiting message
-    if(isMine&&(o.status==='new'||o.status==='cooking')){
-      btns.push('<div style="background:#3d2b00;border:1px solid #f59e0b;border-radius:9px;padding:11px;width:100%;text-align:center;font-size:12px;color:#fbbf24;font-weight:700">⏳ Интизор: ошпаз тайёр карда истодааст...</div>');
-    }
-    html+='<div style="background:#161b22;border:1px solid #21262d;border-left:4px solid '+bC+';border-radius:11px;padding:13px;margin-bottom:9px">'
-      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:8px">'
-      +'<div><div style="font-weight:900;font-size:13px">№'+o.id+(isMine?' <span class="badge b-y">Ман</span>':'')+'</div>'
-      +'<div style="font-size:12px;color:#3b82f6;margin-top:3px">🚗 '+(o.addr||'-')+'</div>'
-      +'<div style="color:#8b949e;font-size:10px;margin-top:2px">'+o.time+'</div>'
-      +'<div style="margin-top:4px">'+sB+' '+pB+'</div></div>'
-      +'<div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#f5c518">'+o.total.toLocaleString()+' сом</div></div></div>'
-      +'<div style="background:#0d1117;border-radius:7px;padding:7px;margin-bottom:9px">'+items+'</div>'
-      +'<div style="display:flex;gap:6px;flex-wrap:wrap">'+btns.join('')+'</div></div>';
-  });
-  el.innerHTML=html;
-}
-function crT(id){var o=orders.find(function(x){return x.id===id;});if(!o||o.courier)return;o.courier=currentStaff?currentStaff.name:'Курьер';renderCourier();toast('✅ Гирифта шуд!');}
-function crP(id){var o=orders.find(function(x){return x.id===id;});if(!o)return;o.status='delivering';renderCourier();if(currentRole==='admin')rAdmAll();toast('🚗 Роҳда','y');}
-function crD(id){var o=orders.find(function(x){return x.id===id;});if(!o)return;o.status='delivered';o.deliveredAt=now();renderCourier();renderCashier();if(currentRole==='admin')rAdmAll();toast('✅ Расонида шуд!');}
-function crFinish(id){
-  var o=orders.find(function(x){return x.id===id;});if(!o)return;
-  o.status='delivered';
-  o.deliveredAt=now();
-  o.deliveredBy=currentStaff?currentStaff.name:'Курьер';
-  renderCourier();renderCashier();renderKitchen();
-  if(currentRole==='admin')rAdmAll();
-  toast('✅ №'+id+' расонида шуд!','g');
-}
-
-// ════════════════════════════════════
-// ADMIN
-// ════════════════════════════════════
-var ATITLES={dash:'📊 Dashboard',orders:'📦 Заказҳо',history:'📜 История',menu:'🍽 Таомҳо',cats:'📂 Категория',tables:'🪑 Мизҳо',staff:'👥 Кормандон',promos:'🎁 Промокод',cards:'🏦 Картаҳо'};
-function AP(name,el){
-  document.querySelectorAll('.apg').forEach(function(p){p.classList.remove('on');});
-  document.querySelectorAll('.asd-it').forEach(function(i){i.classList.remove('on');});
-  document.getElementById('ap-'+name).classList.add('on');
-  if(el)el.classList.add('on');
-  document.getElementById('adm-t').textContent=ATITLES[name]||name;
-  var rs={dash:rAdmDash,orders:rAdmOrders,history:rAdmHistory,menu:rAdmMenu,cats:rAdmCats,tables:rAdmTbls,staff:rAdmStaff,promos:rAdmPromos,cards:rAdmCards};
-  if(rs[name])rs[name]();
-}
-function rAdmAll(){rAdmDash();rAdmOrders();rAdmHistory();rAdmMenu();rAdmCats();rAdmTbls();rAdmStaff();rAdmPromos();rAdmCards();}
-
-function rAdmHistory(){
-  // History = delivered AND paid orders
-  var hist=orders.filter(function(o){return o.status==='delivered'&&o.paid;}).sort(function(a,b){return b.id-a.id;});
-  document.getElementById('h-cnt').textContent=hist.length;
-  document.getElementById('h-total').textContent=hist.reduce(function(s,o){return s+o.total;},0).toLocaleString()+' сом';
-  var ml={cash:'💵',card:'💳',qr:'📱'};
-  var html='';
-  hist.forEach(function(o){
-    var its=Object.values(o.items).map(function(i){return i.name+'×'+i.qty;}).join(', ');
-    var deliveredBy=o.deliveredBy||o.courier||o.waiter||'-';
-    html+='<tr><td><b>#'+o.id+'</b></td>'
-      +'<td style="color:#8b949e;font-size:10px">'+(o.deliveredAt||o.time)+'</td>'
-      +'<td>'+(o.otype==='dine_in'?'🪑'+o.table:o.otype==='delivery'?'🚗':'🏃')+'</td>'
-      +'<td style="color:#8b949e;font-size:10px">'+its.substring(0,28)+'</td>'
-      +'<td style="color:#f5c518;font-weight:800">'+o.total.toLocaleString()+'</td>'
-      +'<td>'+(ml[o.method]||'')+'</td>'
-      +'<td style="font-size:10px">'+deliveredBy+'</td></tr>';
-  });
-  document.getElementById('h-tbl').innerHTML=html||'<tr><td colspan="7" style="text-align:center;color:#555;padding:18px">История холӣ</td></tr>';
-}
-
-function rAdmDash(){
-  var tot=orders.reduce(function(s,o){return s+o.total;},0);
-  var paid=orders.filter(function(o){return o.paid;});
-  var unp=orders.filter(function(o){return !o.paid;});
-  document.getElementById('d-ord').textContent=orders.length;
-  document.getElementById('d-rev').textContent=tot.toLocaleString();
-  document.getElementById('d-paid').textContent=paid.length;
-  document.getElementById('d-wait').textContent=unp.length;
-  var ml={cash:'💵',card:'💳',qr:'📱'};
-  var sm={new:'🆕 Нав',cooking:'👨‍🍳',ready:'✅ Тайёр',delivering:'🏃',delivered:'🚚 Расонида'};
-  var html='';
-  // Show only active orders (not fully done) in dashboard
-  var dashActive=orders.filter(function(o){return o.status!=='delivered'||!o.paid;}).slice(0,6);
-  dashActive.forEach(function(o){
-    html+='<tr><td><b>#'+o.id+'</b></td>'
-      +'<td>'+(o.otype==='dine_in'?'🪑'+o.table:o.otype==='delivery'?'🚗':'🏃')+'</td>'
-      +'<td style="color:#f5c518;font-weight:800">'+o.total.toLocaleString()+'</td>'
-      +'<td>'+(ml[o.method]||'')+'</td>'
-      +'<td><span class="badge '+(o.paid?'b-g':'b-r')+'">'+(o.paid?'✅':'⏳')+'</span></td>'
-      +'<td>'+(sm[o.status]||o.status)+'</td></tr>';
-  });
-  document.getElementById('d-tbl').innerHTML=html||'<tr><td colspan="6" style="text-align:center;color:#555;padding:18px">Заказ нест</td></tr>';
-}
-
-function rAdmOrders(){
-  var ml={cash:'💵 Накдӣ',card:'💳 Карта',qr:'📱 QR'};
-  var sm={new:'🆕 Нав',cooking:'👨‍🍳 Пухта',ready:'✅ Тайёр',delivering:'🏃 Роҳда',delivered:'🚚 Расонида'};
-  var html='';
-  // Active = not delivered OR not paid
-  var active=orders.filter(function(o){return o.status!=='delivered'||!o.paid;});
-  var srch=document.getElementById('ord-search');
-  var q=srch?srch.value.toLowerCase():'';
-  if(q){active=active.filter(function(o){
-    var its=Object.values(o.items).map(function(i){return i.name;}).join(' ').toLowerCase();
-    return String(o.id).includes(q)||its.includes(q)||(o.addr||'').toLowerCase().includes(q)||String(o.table).includes(q);
-  });}
-  active.forEach(function(o){
-    var its=Object.values(o.items).map(function(i){return i.name+'×'+i.qty;}).join(', ');
-    html+='<tr><td><b>#'+o.id+'</b></td>'
-      +'<td>'+(o.otype==='dine_in'?'🪑'+o.table:o.otype==='delivery'?'🚗':'🏃')+'</td>'
-      +'<td style="color:#8b949e;font-size:10px">'+its.substring(0,28)+'</td>'
-      +'<td style="color:#f5c518;font-weight:800">'+o.total.toLocaleString()+'</td>'
-      +'<td>'+(ml[o.method]||'')+'</td>'
-      +'<td><span class="badge '+(o.paid?'b-g':'b-r')+'">'+(o.paid?'✅':'⏳')+'</span></td>'
-      +'<td>'+(sm[o.status]||o.status)+'</td></tr>';
-  });
-  document.getElementById('o-tbl').innerHTML=html||'<tr><td colspan="7" style="text-align:center;color:#555;padding:18px">Заказ нест</td></tr>';
-}
-
-function rAdmMenu(){
-  document.getElementById('m-cnt').textContent=dishes.length;
-  var html='';
-  dishes.forEach(function(d){
-    var catEm=(cats.find(function(c){return c.id===d.cat;})||{}).em||'';
-    var ic=d.photo?'<img src="'+d.photo+'" style="width:100%;height:100%;object-fit:cover">':'<span style="font-size:28px">'+(d.img||'🍽')+'</span>';
-    html+='<div style="display:flex;align-items:center;gap:10px;padding:11px 12px;border-bottom:1px solid #0d1117">'
-      +'<div style="width:60px;height:60px;background:#0d1117;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden">'+ic+'</div>'
-      +'<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:800">'+d.name+(!d.avail?' <span class="badge b-r" style="font-size:9px">❌</span>':'')+'</div>'
-      +'<div style="color:#8b949e;font-size:10px;margin-top:2px">'+catEm+' · ⏱'+d.time+'дақ</div>'
-      +'<div style="font-size:13px;font-weight:900;color:#f5c518;margin-top:2px">'+d.price.toLocaleString()+' сом</div></div>'
-      +'<div style="display:flex;gap:4px;align-items:center;flex-shrink:0">'
-      +'<label class="tog"><input type="checkbox"'+(d.avail?' checked':'')+' onchange="togD('+d.id+',this.checked)"><span class="tsl"></span></label>'
-      +'<button onclick="editDish('+d.id+')" class="btn bgy bxs">✏️</button>'
-      +'<button onclick="delDish('+d.id+')" class="btn br bxs">🗑</button></div></div>';
-  });
-  document.getElementById('m-list').innerHTML=html||'<div style="text-align:center;padding:20px;color:#555">Таом нест</div>';
-}
-function openAddDish(){
-  document.getElementById('d-id').value='0';
-  var sel=document.getElementById('d-cat');
-  sel.innerHTML='';
-  cats.forEach(function(c){sel.innerHTML+='<option value="'+c.id+'">'+c.em+' '+c.name+'</option>';});
-  document.getElementById('d-name').value='';
-  document.getElementById('d-nmru').value='';
-  document.getElementById('d-nmen').value='';
-  document.getElementById('d-price').value='';
-  document.getElementById('d-time').value='25';
-  document.getElementById('d-img').value='';
-  document.getElementById('d-avail').value='1';
-  document.getElementById('d-photo').value='';
-  document.getElementById('d-prev').innerHTML='';
-  var fn=document.getElementById('d-fname');
-  if(fn)fn.textContent='Интихоб нашудааст';
-  tempPhoto=null;
-  OM('m-adddish');
-}
-function editDish(id){
-  var d=dishes.find(function(x){return x.id===id;});if(!d)return;
-  var sel=document.getElementById('d-cat');
-  sel.innerHTML='';
-  cats.forEach(function(c){sel.innerHTML+='<option value="'+c.id+'">'+c.em+' '+c.name+'</option>';});
-  sel.value=d.cat;
-  document.getElementById('d-id').value=d.id;
-  document.getElementById('d-name').value=d.name;
-  document.getElementById('d-nmru').value=d.name_ru||'';
-  document.getElementById('d-nmen').value=d.name_en||'';
-  document.getElementById('d-price').value=d.price;
-  document.getElementById('d-time').value=d.time;
-  document.getElementById('d-img').value=d.img||'';
-  document.getElementById('d-avail').value=d.avail?'1':'0';
-  document.getElementById('d-photo').value='';
-  document.getElementById('d-prev').innerHTML=d.photo?'<img src="'+d.photo+'" style="width:80px;height:80px;object-fit:cover;border-radius:9px;border:2px solid #f5c518">':'';
-  var fn=document.getElementById('d-fname');
-  if(fn)fn.textContent=d.photo?'Сурати ҳозира':'Интихоб нашудааст';
-  tempPhoto=null;
-  OM('m-adddish');
-}
-function prvPhoto(){prvPhotoFrom('d-photo');}
-function prvPhotoFrom(inputId){
-  var input=document.getElementById(inputId);
-  if(!input)return;
-  var f=input.files[0];
-  if(!f)return;
-  var fnEl=document.getElementById('d-fname');
-  if(fnEl)fnEl.textContent='✅ '+f.name;
-  var r=new FileReader();
-  r.onload=function(ev){
-    tempPhoto=ev.target.result;
-    document.getElementById('d-prev').innerHTML=
-      '<img src="'+tempPhoto+'" style="width:100px;height:100px;object-fit:cover;border-radius:9px;border:2px solid #f5c518">';
-  };
-  r.readAsDataURL(f);
-}
-function saveDish(){
-  var id=parseInt(document.getElementById('d-id').value);
-  var name=document.getElementById('d-name').value.trim();
-  var price=parseInt(document.getElementById('d-price').value);
-  if(!name||!price){toast('❌ Ном ва нарх!','r');return;}
-  var data={
-    cat:parseInt(document.getElementById('d-cat').value),
-    name:name,
-    name_ru:document.getElementById('d-nmru').value.trim(),
-    name_en:document.getElementById('d-nmen').value.trim(),
-    price:price,
-    time:parseInt(document.getElementById('d-time').value)||25,
-    img:document.getElementById('d-img').value||'🍽',
-    avail:document.getElementById('d-avail').value==='1'
-  };
-  if(id===0){
-    data.id=nid();data.photo=tempPhoto;
-    dishes.push(data);
-    toast('✅ '+name+' илова шуд!');
-  } else {
-    var d=dishes.find(function(x){return x.id===id;});
-    Object.assign(d,data);
-    if(tempPhoto)d.photo=tempPhoto;
-    toast('💾 Сохта шуд!');
-  }
-  tempPhoto=null;
-  CM('m-adddish');rAdmMenu();renderCustomer(curCat);
-}
-function togD(id,v){var d=dishes.find(function(x){return x.id===id;});if(d){d.avail=v;rAdmMenu();renderCustomer(curCat);}}
-function delDish(id){if(!confirm('Ҳазф?'))return;dishes=dishes.filter(function(x){return x.id!==id;});rAdmMenu();renderCustomer(curCat);}
-
-function rAdmCats(){
-  // Restaurant settings preview
-  var rp=document.getElementById('rest-preview');
-  if(rp){
-    rp.innerHTML='<div style="background:#0d1117;border:1px solid #21262d;border-radius:9px;padding:12px">'
-      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;flex-wrap:wrap;gap:5px">'
-      +'<div style="font-size:14px;font-weight:900;color:#f5c518">'+restSettings.name+'</div>'
-      +'<div style="font-size:10px;color:#8b949e">'+restSettings.hours+'</div></div>'
-      +'<div style="font-size:11px;color:#8b949e;margin-bottom:8px">'+restSettings.tagline+'</div>'
-      +'<div style="display:flex;gap:9px;flex-wrap:wrap;font-size:10px;color:#8b949e">'
-      +(restSettings.phone?'<span>📞 '+restSettings.phone+'</span>':'')
-      +(restSettings.address?'<span>📍 '+restSettings.address+'</span>':'')
-      +'</div></div>';
-  }
-  // Banner preview
-  var bp=document.getElementById('banner-preview');
-  if(bp){
-    if(bannerImg){
-      bp.innerHTML='<img src="'+bannerImg+'" style="width:100%;max-height:140px;object-fit:cover;border-radius:9px">';
-    } else {
-      bp.innerHTML='<div style="background:#0d1117;border:2px dashed #30363d;border-radius:9px;padding:25px;text-align:center;color:#555;font-size:12px">🖼 Банер нест. "📷 Иваз кардан" пахш кунед</div>';
-    }
-  }
-  // Cats list
-  var html='';
-  cats.forEach(function(c){
-    var img=c.photo?'<img src="'+c.photo+'" style="width:50px;height:50px;object-fit:cover;border-radius:9px">':'<div style="font-size:30px">'+c.em+'</div>';
-    var cnt=dishes.filter(function(d){return d.cat===c.id;}).length;
-    html+='<div style="display:flex;align-items:center;gap:11px;padding:10px 12px;border-bottom:1px solid #0d1117">'
-      +'<div style="width:50px;height:50px;background:#0d1117;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden">'+img+'</div>'
-      +'<div style="flex:1;min-width:0">'
-      +'<div style="font-size:13px;font-weight:800">'+c.name+'</div>'
-      +'<div style="font-size:10px;color:#8b949e">'+cnt+' таом · '+(c.name_ru||'-')+' / '+(c.name_en||'-')+'</div></div>'
-      +'<div style="display:flex;gap:4px">'
-      +'<button onclick="editCat('+c.id+')" class="btn bgy bxs">✏️</button>'
-      +'<button onclick="delCat('+c.id+')" class="btn br bxs">🗑</button>'
-      +'</div></div>';
-  });
-  document.getElementById('c-list').innerHTML=html||'<div style="text-align:center;padding:20px;color:#555">Категория нест</div>';
-}
-
-function openAddCat(){
-  document.getElementById('c-em').value='';
-  document.getElementById('c-nm').value='';
-  document.getElementById('c-nmru').value='';
-  document.getElementById('c-nmen').value='';
-  document.getElementById('c-photo').value='';
-  document.getElementById('c-prev').innerHTML='';
-  document.getElementById('c-fname').textContent='Интихоб нашудааст';
-  tempCatPhoto=null;
-  // Reset to add mode
-  window._editCatId=null;
-  OM('m-addcat');
-}
-
-function editCat(id){
-  var c=cats.find(function(x){return x.id===id;});if(!c)return;
-  document.getElementById('c-em').value=c.em||'';
-  document.getElementById('c-nm').value=c.name||'';
-  document.getElementById('c-nmru').value=c.name_ru||'';
-  document.getElementById('c-nmen').value=c.name_en||'';
-  document.getElementById('c-photo').value='';
-  document.getElementById('c-prev').innerHTML=c.photo?'<img src="'+c.photo+'" style="width:80px;height:80px;object-fit:cover;border-radius:9px;border:2px solid #f5c518">':'';
-  document.getElementById('c-fname').textContent=c.photo?'Сурати ҳозира':'Интихоб нашудааст';
-  tempCatPhoto=null;
-  window._editCatId=id;
-  OM('m-addcat');
-}
-
-function prvCatPhoto(){prvCatPhotoFrom('c-photo');}
-function prvCatPhotoFrom(inputId){
-  var input=document.getElementById(inputId);
-  if(!input)return;
-  var f=input.files[0];
-  if(!f)return;
-  var fn=document.getElementById('c-fname');
-  if(fn)fn.textContent='✅ '+f.name;
-  var r=new FileReader();
-  r.onload=function(ev){
-    tempCatPhoto=ev.target.result;
-    document.getElementById('c-prev').innerHTML='<img src="'+tempCatPhoto+'" style="width:100px;height:100px;object-fit:cover;border-radius:9px;border:2px solid #f5c518">';
-  };
-  r.readAsDataURL(f);
-}
-
-function openBanner(){
-  document.getElementById('b-photo').value='';
-  document.getElementById('b-prev').innerHTML=bannerImg?'<img src="'+bannerImg+'" style="width:100%;max-height:160px;object-fit:cover;border-radius:9px;border:2px solid #f5c518">':'';
-  document.getElementById('b-fname').textContent=bannerImg?'✅ Сурати ҳозира':'Интихоб нашудааст';
-  tempBnrPhoto=null;
-  // Highlight current height button
-  document.querySelectorAll('.bh-btn').forEach(function(b){
-    b.className=parseInt(b.getAttribute('data-h'))===bannerHeight?'bh-btn btn bg bsm':'bh-btn btn bgy bsm';
-  });
-  var cur=document.getElementById('bh-cur');
-  if(cur)cur.textContent=bannerHeight+'px';
-  OM('m-banner');
-}
-
-function prvBnrPhoto(){prvBnrPhotoFrom('b-photo');}
-function prvBnrPhotoFrom(inputId){
-  var input=document.getElementById(inputId);
-  if(!input)return;
-  var f=input.files[0];
-  if(!f)return;
-  document.getElementById('b-fname').textContent='✅ '+f.name;
-  var r=new FileReader();
-  r.onload=function(ev){
-    tempBnrPhoto=ev.target.result;
-    document.getElementById('b-prev').innerHTML='<img src="'+tempBnrPhoto+'" style="width:100%;max-height:160px;object-fit:cover;border-radius:9px;border:2px solid #f5c518">';
-  };
-  r.readAsDataURL(f);
-}
-
-function saveBanner(){
-  if(tempBnrPhoto)bannerImg=tempBnrPhoto;
-  CM('m-banner');rAdmCats();renderCustomer(curCat);toast('💾 Банер сохта шуд!');
-}
-
-function rmBanner(){
-  if(!confirm('Банерро ҳазф мекунед?'))return;
-  bannerImg=null;tempBnrPhoto=null;
-  CM('m-banner');rAdmCats();renderCustomer(curCat);toast('🗑 Банер ҳазф','r');
-}
-
-function setBnrH(h,btn){
-  bannerHeight=h;
-  document.querySelectorAll('.bh-btn').forEach(function(b){
-    b.className='bh-btn btn bgy bsm';
-  });
-  if(btn)btn.className='bh-btn btn bg bsm';
-  var cur=document.getElementById('bh-cur');
-  if(cur)cur.textContent=h+'px';
-}
-
-function openRestSet(){
-  document.getElementById('rs-nm').value=restSettings.name;
-  document.getElementById('rs-nmru').value=restSettings.name_ru;
-  document.getElementById('rs-nmen').value=restSettings.name_en;
-  document.getElementById('rs-tg').value=restSettings.tagline;
-  document.getElementById('rs-tgru').value=restSettings.tagline_ru;
-  document.getElementById('rs-tgen').value=restSettings.tagline_en;
-  document.getElementById('rs-hr').value=restSettings.hours;
-  document.getElementById('rs-ph').value=restSettings.phone;
-  document.getElementById('rs-ad').value=restSettings.address;
-  OM('m-restset');
-}
-
-function saveRestSet(){
-  restSettings.name=document.getElementById('rs-nm').value.trim()||'Шоми Лолагӣ';
-  restSettings.name_ru=document.getElementById('rs-nmru').value.trim()||restSettings.name;
-  restSettings.name_en=document.getElementById('rs-nmen').value.trim()||restSettings.name;
-  restSettings.tagline=document.getElementById('rs-tg').value.trim();
-  restSettings.tagline_ru=document.getElementById('rs-tgru').value.trim()||restSettings.tagline;
-  restSettings.tagline_en=document.getElementById('rs-tgen').value.trim()||restSettings.tagline;
-  restSettings.hours=document.getElementById('rs-hr').value.trim()||'10:00-23:00';
-  restSettings.phone=document.getElementById('rs-ph').value.trim();
-  restSettings.address=document.getElementById('rs-ad').value.trim();
-  CM('m-restset');
-  rAdmCats();
-  renderCustomer(curCat);
-  applyLang();
-  toast('💾 Матнҳои асосӣ сохта шуд!');
-}
-
-function restName(){
-  if(curLang==='ru')return restSettings.name_ru||restSettings.name;
-  if(curLang==='en')return restSettings.name_en||restSettings.name;
-  return restSettings.name;
-}
-function restTagline(){
-  if(curLang==='ru')return restSettings.tagline_ru||restSettings.tagline;
-  if(curLang==='en')return restSettings.tagline_en||restSettings.tagline;
-  return restSettings.tagline;
-}
-function saveCat(){
-  var em=document.getElementById('c-em').value||'🍽';
-  var nm=document.getElementById('c-nm').value.trim();
-  var nmru=document.getElementById('c-nmru').value.trim();
-  var nmen=document.getElementById('c-nmen').value.trim();
-  if(!nm){toast('❌ Ном!','r');return;}
-  if(window._editCatId){
-    var c=cats.find(function(x){return x.id===window._editCatId;});
-    if(c){
-      c.em=em;c.name=nm;c.name_ru=nmru;c.name_en=nmen;
-      if(tempCatPhoto)c.photo=tempCatPhoto;
-      toast('💾 Сохта шуд!');
-    }
-  } else {
-    cats.push({id:nid(),em:em,name:nm,name_ru:nmru,name_en:nmen,photo:tempCatPhoto});
-    toast('✅ '+em+' '+nm);
-  }
-  tempCatPhoto=null;window._editCatId=null;
-  CM('m-addcat');rAdmCats();renderCustomer(curCat);
-}
-function delCat(id){if(!confirm('Ҳазф?'))return;cats=cats.filter(function(c){return c.id!==id;});rAdmCats();renderCustomer(curCat);}
-
-function rAdmTbls(){
-  var s2c={free:'#052e16',occupied:'#3d0000',reserved:'#3d2b00'};
-  var s2b={free:'#22c55e',occupied:'#ef4444',reserved:'#f59e0b'};
-  var s2l={free:'🟢 Озод',occupied:'🔴 Банд',reserved:'🟡 Брон'};
-  var html='';
-  tables.forEach(function(t){
-    html+='<div onclick="cyT('+t.n+')" style="background:'+s2c[t.st]+'20;border:2px solid '+s2b[t.st]+';border-radius:9px;padding:9px;text-align:center;cursor:pointer">'
-      +'<div style="font-size:16px;font-weight:900">№'+t.n+'</div>'
-      +'<div style="color:#8b949e;font-size:9px">'+t.cap+'н</div>'
-      +'<div style="font-size:9px;font-weight:700;margin-top:3px;color:'+s2b[t.st]+'">'+s2l[t.st]+'</div></div>';
-  });
-  document.getElementById('t-grid').innerHTML=html;
-}
-function cyT(n){var t=tables.find(function(x){return x.n===n;});if(!t)return;var nx={free:'occupied',occupied:'reserved',reserved:'free'};t.st=nx[t.st];rAdmTbls();}
-function saveTbl(){var n=parseInt(document.getElementById('t-n').value);var cap=parseInt(document.getElementById('t-c').value)||4;if(!n){toast('❌','r');return;}if(tables.find(function(t){return t.n===n;})){toast('❌ Мавҷуд!','r');return;}tables.push({n:n,cap:cap,st:'free'});tables.sort(function(a,b){return a.n-b.n;});CM('m-addtbl');rAdmTbls();document.getElementById('t-n').value='';toast('✅');}
-
-function rAdmStaff(){
-  var rn={waiter:'🛎 Афитсиант',kitchen:'👨‍🍳 Ошпаз',cashier:'💰 Хазиначи',courier:'🚗 Курьер'};
-  var html='';
-  staffList.forEach(function(s){
-    html+='<tr><td style="font-weight:800">'+s.name+'</td><td>'+(rn[s.role]||s.role)+'</td>'
-      +'<td style="color:#8b949e">'+(s.login||'-')+'</td>'
-      +'<td><code style="background:#0d1117;padding:2px 5px;border-radius:4px;font-size:10px;color:#f5c518">'+(s.pass||'-')+'</code></td>'
-      +'<td style="color:#f5c518">'+s.sal.toLocaleString()+'</td>'
-      +'<td><button onclick="delStaff('+s.id+')" class="btn br bxs">🗑</button></td></tr>';
-  });
-  document.getElementById('s-tbl').innerHTML=html||'<tr><td colspan="6" style="text-align:center;color:#555;padding:12px">Нест</td></tr>';
-}
-function saveStaff(){
-  var nm=document.getElementById('s-nm').value.trim();
-  if(!nm){toast('❌','r');return;}
-  staffList.push({id:nid(),name:nm,role:document.getElementById('s-rl').value,
-    login:document.getElementById('s-lg').value,pass:document.getElementById('s-ps').value,
-    tg:document.getElementById('s-tg').value,sal:parseInt(document.getElementById('s-sl').value)||0});
-  CM('m-addstaff');rAdmStaff();
-  ['s-nm','s-lg','s-ps','s-tg','s-sl'].forEach(function(id){document.getElementById(id).value='';});
-  toast('✅');
-}
-function delStaff(id){if(!confirm('Ҳазф?'))return;staffList=staffList.filter(function(s){return s.id!==id;});rAdmStaff();}
-
-function rAdmPromos(){
-  var html='';
-  promosList.forEach(function(p){
-    html+='<tr><td><span style="background:#0d1117;border:1px solid #30363d;padding:2px 6px;border-radius:4px;font-family:monospace;color:#f5c518;font-size:11px">'+p.code+'</span></td>'
-      +'<td><b>'+p.disc+'%</b></td><td style="color:#8b949e">'+p.used+'</td>'
-      +'<td><span class="badge '+(p.active?'b-g':'b-gr')+'">'+(p.active?'✅':'❌')+'</span></td>'
-      +'<td style="display:flex;gap:3px"><button onclick="tgP('+p.id+')" class="btn '+(p.active?'br':'bgn')+' bxs">'+(p.active?'Бек':'Фа')+'</button><button onclick="dlP('+p.id+')" class="btn bgy bxs">🗑</button></td></tr>';
-  });
-  document.getElementById('p-tbl').innerHTML=html||'<tr><td colspan="5" style="text-align:center;color:#555;padding:12px">Нест</td></tr>';
-}
-function savePromo(){var cd=document.getElementById('p-cd').value.toUpperCase().trim();var dc=parseInt(document.getElementById('p-dc').value);if(!cd||!dc){toast('❌','r');return;}promosList.push({id:nid(),code:cd,disc:dc,used:0,active:true});CM('m-addpromo');rAdmPromos();document.getElementById('p-cd').value='';document.getElementById('p-dc').value='';toast('✅');}
-function tgP(id){var p=promosList.find(function(x){return x.id===id;});if(p){p.active=!p.active;rAdmPromos();}}
-function dlP(id){if(!confirm('Ҳазф?'))return;promosList=promosList.filter(function(p){return p.id!==id;});rAdmPromos();}
-
-function rAdmCards(){
-  var html='';
-  bankCards.forEach(function(c){
-    html+='<div style="background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:11px;padding:13px;margin-bottom:9px;border:1px solid #30363d">'
-      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">'
-      +'<div style="font-size:11px;color:#8b949e">🏦 '+c.bank+'</div>'
-      +'<div style="display:flex;gap:4px"><button onclick="edC('+c.id+')" class="btn bgy bxs">✏️</button><button onclick="dlC('+c.id+')" class="btn br bxs">🗑</button></div></div>'
-      +'<div style="font-family:monospace;font-size:15px;font-weight:900;color:#f5c518;letter-spacing:2px;margin-bottom:6px">'+c.num+'</div>'
-      +'<div style="font-size:10px;color:#e8e8e8">'+c.hold+'</div></div>';
-  });
-  document.getElementById('bc-list').innerHTML=html||'<div style="text-align:center;padding:25px;color:#555">Карта нест</div>';
-}
-function openAddCard(){document.getElementById('bc-id').value='0';['bc-bk','bc-nm','bc-hd'].forEach(function(id){document.getElementById(id).value='';});OM('m-addcard');}
-function edC(id){var c=bankCards.find(function(x){return x.id===id;});if(!c)return;document.getElementById('bc-id').value=c.id;document.getElementById('bc-bk').value=c.bank;document.getElementById('bc-nm').value=c.num;document.getElementById('bc-hd').value=c.hold;OM('m-addcard');}
-function saveCard(){var id=parseInt(document.getElementById('bc-id').value);var bk=document.getElementById('bc-bk').value.trim();var nm=document.getElementById('bc-nm').value.trim();var hd=document.getElementById('bc-hd').value.trim();if(!bk||!nm||!hd){toast('❌','r');return;}if(id===0){bankCards.push({id:nid(),bank:bk,num:nm,hold:hd});}else{var c=bankCards.find(function(x){return x.id===id;});if(c){c.bank=bk;c.num=nm;c.hold=hd;}}CM('m-addcard');rAdmCards();toast('✅');}
-function dlC(id){if(bankCards.length<=1){toast('❌ Як карта бошад!','r');return;}if(!confirm('Ҳазф?'))return;bankCards=bankCards.filter(function(c){return c.id!==id;});rAdmCards();}
-
-// AUTO REFRESH
-setInterval(function(){
-  if(currentRole==='kitchen')renderKitchen();
-  else if(currentRole==='waiter')renderWaiter();
-  else if(currentRole==='cashier')renderCashier();
-  else if(currentRole==='courier')renderCourier();
-  else if(currentRole==='admin')rAdmDash();
-},5000);
-
-// SOUND NOTIFICATION
-var lastOrderId=ordCnt;
-function checkNewOrders(){
-  var maxId=orders.length>0?Math.max.apply(null,orders.map(function(o){return o.id;})):ordCnt;
-  if(maxId>lastOrderId && ['kitchen','waiter','cashier','courier'].includes(currentRole)){
-    // Beep
-    try{
-      var ctx=new (window.AudioContext||window.webkitAudioContext)();
-      var osc=ctx.createOscillator();
-      var gain=ctx.createGain();
-      osc.connect(gain);gain.connect(ctx.destination);
-      osc.frequency.value=800;osc.type='sine';
-      gain.gain.setValueAtTime(0.3,ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.3);
-      osc.start(ctx.currentTime);osc.stop(ctx.currentTime+0.3);
-    }catch(e){}
-    toast('🔔 Заказ нав омад: №'+maxId,'g');
-  }
-  lastOrderId=maxId;
-}
-setInterval(checkNewOrders,2000);
-
-// CLEAR HISTORY - admin only (daily reset)
-function clearHistory(){
-  if(!confirm('Ҳамаи историяро тоза карданӣ ҳастед? Заказҳои тамомшуда нест мешаванд!'))return;
-  orders=orders.filter(function(o){return o.status!=='delivered'||!o.paid;});
-  rAdmAll();
-  toast('🗑 История тоза шуд!','g');
-}
-
-// INIT
-window.onload=function(){
-  SP('customer');
-  renderCustomer();
-  applyLang();
-};
-
-</script>
-</body>
-</html>
+  var el=document.getElementById('courier-lis                          
