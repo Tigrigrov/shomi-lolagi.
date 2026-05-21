@@ -1,0 +1,1998 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Шоми Лолагӣ</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d1117;color:#e8e8e8;min-height:100vh}
+.page{display:none!important}.page.active{display:block!important}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:10px 14px;border-radius:9px;border:none;cursor:pointer;font-size:12px;font-weight:800;font-family:inherit;white-space:nowrap}
+.btn:active{opacity:.7}
+.bg{background:#f5c518;color:#000}.bgn{background:#22c55e;color:#000}.br{background:#ef4444;color:#fff}
+.bb{background:#3b82f6;color:#fff}.bp{background:#a855f7;color:#fff}.bgy{background:#21262d;color:#e8e8e8}
+.bsm{padding:6px 11px;font-size:11px}.bxs{padding:4px 8px;font-size:10px}.bfull{width:100%;padding:13px;font-size:14px}
+.card{background:#161b22;border:1px solid #21262d;border-radius:11px;overflow:hidden;margin-bottom:11px}
+.card-h{padding:11px 13px;border-bottom:1px solid #21262d;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px}
+.card-h h3{font-size:13px;font-weight:900}
+.card-b{padding:13px}
+.hdr{background:#010409;border-bottom:2px solid #f5c518;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.hdr-l{display:flex;align-items:center;gap:9px}
+.ico{font-size:22px}.nm{font-size:14px;font-weight:900;color:#f5c518}.st{font-size:9px;color:#22c55e}
+.badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:18px;font-size:10px;font-weight:800}
+.b-g{background:#052e16;color:#4ade80}.b-r{background:#3d0000;color:#f87171}
+.b-y{background:#3d2b00;color:#fbbf24}.b-bl{background:#0c1a30;color:#60a5fa}
+.b-gr{background:#21262d;color:#8b949e}.b-p{background:#2d1b4e;color:#c084fc}
+.inp{width:100%;padding:10px 12px;background:#0d1117;border:1px solid #30363d;border-radius:8px;color:#e8e8e8;font-size:13px;font-family:inherit;outline:none}
+.inp:focus{border-color:#f5c518}
+.lbl{display:block;font-size:11px;color:#8b949e;font-weight:700;margin-bottom:4px}
+.fg{margin-bottom:12px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+#toasts{position:fixed;top:60px;right:10px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.toast{background:#161b22;border:1px solid #30363d;border-radius:9px;padding:10px 13px;font-size:12px;font-weight:700;max-width:280px;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+.t-g{border-left:3px solid #22c55e}.t-r{border-left:3px solid #ef4444}
+.t-y{border-left:3px solid #f5c518}.t-b{border-left:3px solid #3b82f6}
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:2000;align-items:center;justify-content:center;padding:13px}
+.mbg.on{display:flex}
+.mbox{background:#161b22;border:1px solid #30363d;border-radius:14px;width:100%;max-width:420px;max-height:90vh;overflow-y:auto}
+.mh{padding:13px 15px;border-bottom:1px solid #21262d;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#161b22}
+.mh h3{font-size:14px;font-weight:900;color:#f5c518}
+.mcl{background:none;border:none;color:#8b949e;font-size:22px;cursor:pointer}
+.mb{padding:14px}.mf{padding:11px 13px;border-top:1px solid #21262d;display:flex;justify-content:flex-end;gap:7px}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{padding:8px 10px;text-align:left;color:#8b949e;font-weight:700;border-bottom:2px solid #21262d;white-space:nowrap;font-size:11px}
+.tbl td{padding:8px 10px;border-bottom:1px solid #0d1117}
+.tog{position:relative;width:32px;height:18px;cursor:pointer}
+.tog input{opacity:0;width:0;height:0}
+.tsl{position:absolute;inset:0;background:#30363d;border-radius:18px}
+.tsl:before{content:'';position:absolute;height:12px;width:12px;left:3px;top:3px;background:#8b949e;border-radius:50%;transition:.3s}
+.tog input:checked+.tsl{background:#22c55e}
+.tog input:checked+.tsl:before{transform:translateX(14px);background:#fff}
+.cat-bar{display:flex;gap:7px;overflow-x:auto;padding:9px 13px;background:#010409;border-bottom:1px solid #21262d;position:sticky;top:58px;z-index:99}
+.cat-bar::-webkit-scrollbar{display:none}
+.ctab{padding:6px 12px;border-radius:18px;border:none;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;font-family:inherit}
+.ctab.on{background:#f5c518;color:#000}.ctab:not(.on){background:#21262d;color:#8b949e}
+.dish{background:#161b22;border:1px solid #21262d;border-radius:11px;padding:11px;margin-bottom:8px;display:flex;gap:11px;align-items:center}
+.dish-ico{font-size:30px;width:54px;height:54px;background:#21262d;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.dish-ico img{width:100%;height:100%;object-fit:cover;border-radius:9px}
+.cbar{position:fixed;bottom:0;left:0;right:0;background:#f5c518;padding:12px 17px;display:flex;justify-content:space-between;align-items:center;z-index:50;transform:translateY(100%);transition:transform .3s}
+.cbar.show{transform:translateY(0)}
+.kc{border-radius:11px;padding:12px;border:2px solid #30363d;margin-bottom:10px;background:#161b22}
+.kc.new{border-color:#ef4444}.kc.cooking{border-color:#f59e0b}.kc.ready{border-color:#22c55e}
+.wc{background:#161b22;border-left:4px solid #30363d;border-radius:10px;padding:13px;margin-bottom:9px}
+.wc.new{border-left-color:#3b82f6}.wc.cooking{border-left-color:#a855f7}
+.wc.ready{border-left-color:#22c55e}.wc.delivering{border-left-color:#f59e0b}
+.lang-btn{padding:5px 9px;border-radius:18px;border:none;font-size:10px;font-weight:800;cursor:pointer;font-family:inherit}
+.lang-btn.on{background:#f5c518;color:#000}.lang-btn:not(.on){background:#21262d;color:#8b949e}
+#page-admin.active{display:flex!important;min-height:100vh}
+.asd{width:195px;background:#010409;border-right:1px solid #21262d;flex-shrink:0;overflow-y:auto;height:100vh;position:sticky;top:0}
+.asd-logo{padding:13px;border-bottom:1px solid #21262d}
+.asd-logo .n{font-size:13px;font-weight:900;color:#f5c518}
+.asd-logo .s{font-size:10px;color:#555;margin-top:2px}
+.asd-sec{font-size:9px;color:#333;font-weight:900;padding:9px 13px 3px;text-transform:uppercase;letter-spacing:1.4px}
+.asd-it{display:flex;align-items:center;gap:8px;padding:9px 13px;color:#8b949e;font-size:11px;font-weight:700;cursor:pointer;border-left:3px solid transparent}
+.asd-it.on{background:#161b22;color:#f5c518;border-left-color:#f5c518}
+.am{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.atop{background:#161b22;border-bottom:1px solid #21262d;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.acn{flex:1;overflow-y:auto;padding:13px}
+.apg{display:none}.apg.on{display:block}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:11px}
+.sc{background:#161b22;border:1px solid #21262d;border-radius:10px;padding:12px}
+.sc .v{font-size:20px;font-weight:900;margin-top:3px}.sc .l{font-size:10px;color:#8b949e}
+@media(max-width:768px){
+  #page-admin.active{flex-direction:column}
+  .asd{width:100%;height:auto;position:sticky;top:0;z-index:90;display:flex;flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid #21262d;flex-shrink:0}
+  .asd::-webkit-scrollbar{display:none}
+  .asd-logo,.asd-sec{display:none}
+  .asd-it{padding:10px 12px;white-space:nowrap;font-size:11px;border-left:none;border-bottom:3px solid transparent;flex-shrink:0}
+  .asd-it.on{border-left:none;border-bottom-color:#f5c518}
+  .acn{padding:10px}
+}
+</style>
+</head>
+<body>
+<div id="toasts"></div>
+
+<div class="mbg" id="m-staff">
+  <div class="mbox" style="max-width:330px">
+    <div class="mh"><h3>🔑 Кормандон</h3><button class="mcl" onclick="CM('m-staff')">×</button></div>
+    <div class="mb" style="text-align:center">
+      <div style="font-size:38px;margin-bottom:8px">🍽</div>
+      <div style="font-size:15px;font-weight:900;color:#f5c518;margin-bottom:18px">Шоми Лолагӣ</div>
+      <div id="sl-err" style="display:none;background:#3d0000;border:1px solid #ef4444;border-radius:8px;padding:8px;font-size:11px;color:#f87171;margin-bottom:10px">❌ Парол нодуруст!</div>
+      <div class="fg" style="text-align:left">
+        <label class="lbl">Нақш</label>
+        <select id="sl-role" class="inp">
+          <option value="admin">👑 Admin</option>
+          <option value="kitchen">👨‍🍳 Ошпаз</option>
+          <option value="waiter">🛎 Афитсиант</option>
+          <option value="cashier">💰 Хазиначи</option>
+          <option value="courier">🚗 Курьер</option>
+        </select>
+      </div>
+      <div class="fg" style="text-align:left">
+        <label class="lbl">Парол</label>
+        <input type="password" id="sl-pass" class="inp" placeholder="••••••" onkeypress="if(event.key==='Enter')sLogin()">
+      </div>
+      <button onclick="sLogin()" class="btn bg bfull">🔑 Даромадан</button>
+      <div style="margin-top:10px;font-size:10px;color:#555">admin2024 · kitchen2024 · waiter2024 · cashier2024 · courier2024</div>
+    </div>
+  </div>
+</div>
+
+<div class="mbg" id="m-adddish">
+  <div class="mbox">
+    <div class="mh"><h3>➕ Таом</h3><button class="mcl" onclick="CM('m-adddish')">×</button></div>
+    <div class="mb">
+      <input type="hidden" id="d-id" value="0">
+      <div class="fg"><label class="lbl">Категория *</label><select id="d-cat" class="inp"></select></div>
+      <div class="fg"><label class="lbl">Ном (Тоҷикӣ) *</label><input type="text" id="d-name" class="inp" placeholder="Кабоби Тоҷикӣ"></div>
+      <div class="g2">
+        <div class="fg"><label class="lbl">Ном RU</label><input type="text" id="d-nmru" class="inp" placeholder="Кебаб"></div>
+        <div class="fg"><label class="lbl">Ном EN</label><input type="text" id="d-nmen" class="inp" placeholder="Kebab"></div>
+      </div>
+      <div class="g2">
+        <div class="fg"><label class="lbl">Нарх (сом) *</label><input type="number" id="d-price" class="inp"></div>
+        <div class="fg"><label class="lbl">Вақт (дақ)</label><input type="number" id="d-time" class="inp" value="25"></div>
+      </div>
+      <div class="fg">
+        <label class="lbl">Сурати таом</label>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:6px">
+          <label for="d-photo-cam" style="background:#f5c518;color:#000;padding:10px 14px;border-radius:9px;font-size:12px;font-weight:900;cursor:pointer;flex:1;text-align:center;min-width:100px">📷 Камера</label>
+          <input type="file" id="d-photo-cam" accept="image/*" capture="environment" style="display:none" onchange="prvPhotoFrom('d-photo-cam')">
+          <label for="d-photo" style="background:#3b82f6;color:#fff;padding:10px 14px;border-radius:9px;font-size:12px;font-weight:900;cursor:pointer;flex:1;text-align:center;min-width:100px">🖼 Галерея</label>
+          <input type="file" id="d-photo" accept="image/*" style="display:none" onchange="prvPhotoFrom('d-photo')">
+        </div>
+        <div style="font-size:11px;color:#8b949e;margin-bottom:6px" id="d-fname">Интихоб нашудааст</div>
+        <div id="d-prev"></div>
+      </div>
+      <div class="fg"><label class="lbl">Ё Эмодзи (агар сурат набошад)</label><input type="text" id="d-img" class="inp" placeholder="🍖"></div>
+      <div class="fg"><label class="lbl">Статус</label><select id="d-avail" class="inp"><option value="1">✅ Мавҷуд</option><option value="0">❌ Тамом</option></select></div>
+    </div>
+    <div class="mf"><button class="btn bgy bsm" onclick="CM('m-adddish')">Бекор</button><button class="btn bg bsm" onclick="saveDish()">💾 Сохтан</button></div>
+  </div>
+</div>
+
+<div class="mbg" id="m-addcat">
+  <div class="mbox"><div class="mh"><h3>📂 Категория</h3><button class="mcl" onclick="CM('m-addcat')">×</button></div>
+  <div class="mb">
+    <div class="g2">
+      <div class="fg"><label class="lbl">Эмодзи</label><input type="text" id="c-em" class="inp" placeholder="🥘"></div>
+      <div class="fg"><label class="lbl">Ном *</label><input type="text" id="c-nm" class="inp"></div>
+    </div>
+    <div class="g2">
+      <div class="fg"><label class="lbl">Ном RU</label><input type="text" id="c-nmru" class="inp" placeholder="Супы"></div>
+      <div class="fg"><label class="lbl">Ном EN</label><input type="text" id="c-nmen" class="inp" placeholder="Soups"></div>
+    </div>
+    <div class="fg">
+      <label class="lbl">Сурати категория</label>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:6px">
+        <label for="c-photo-cam" style="background:#f5c518;color:#000;padding:10px 14px;border-radius:9px;font-size:12px;font-weight:900;cursor:pointer;flex:1;text-align:center;min-width:100px">📷 Камера</label>
+        <input type="file" id="c-photo-cam" accept="image/*" capture="environment" style="display:none" onchange="prvCatPhotoFrom('c-photo-cam')">
+        <label for="c-photo" style="background:#3b82f6;color:#fff;padding:10px 14px;border-radius:9px;font-size:12px;font-weight:900;cursor:pointer;flex:1;text-align:center;min-width:100px">🖼 Галерея</label>
+        <input type="file" id="c-photo" accept="image/*" style="display:none" onchange="prvCatPhotoFrom('c-photo')">
+      </div>
+      <div style="font-size:11px;color:#8b949e;margin-bottom:6px" id="c-fname">Интихоб нашудааст</div>
+      <div id="c-prev"></div>
+    </div>
+  </div>
+  <div class="mf"><button class="btn bgy bsm" onclick="CM('m-addcat')">Бекор</button><button class="btn bg bsm" onclick="saveCat()">✅ Илова</button></div></div>
+</div>
+
+<!-- BANNER SETTINGS -->
+<div class="mbg" id="m-banner">
+  <div class="mbox">
+    <div class="mh"><h3>🖼 Банери асосӣ</h3><button class="mcl" onclick="CM('m-banner')">×</button></div>
+    <div class="mb">
+      <div style="font-size:11px;color:#8b949e;margin-bottom:11px">Ин сурат дар саҳифаи мизоҷ дар боло нишон дода мешавад</div>
+      <div class="fg">
+        <label class="lbl">Сурат барои банер</label>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:6px">
+          <label for="b-photo-cam" style="background:#f5c518;color:#000;padding:10px 14px;border-radius:9px;font-size:12px;font-weight:900;cursor:pointer;flex:1;text-align:center;min-width:100px">📷 Камера</label>
+          <input type="file" id="b-photo-cam" accept="image/*" capture="environment" style="display:none" onchange="prvBnrPhotoFrom('b-photo-cam')">
+          <label for="b-photo" style="background:#3b82f6;color:#fff;padding:10px 14px;border-radius:9px;font-size:12px;font-weight:900;cursor:pointer;flex:1;text-align:center;min-width:100px">🖼 Галерея</label>
+          <input type="file" id="b-photo" accept="image/*" style="display:none" onchange="prvBnrPhotoFrom('b-photo')">
+        </div>
+        <div style="font-size:11px;color:#8b949e;margin-bottom:6px" id="b-fname">Интихоб нашудааст</div>
+        <div id="b-prev"></div>
+      </div>
+      <div class="fg">
+        <label class="lbl">📏 Ҳаҷми банер</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px">
+          <button onclick="setBnrH(100,this)" class="bh-btn btn bgy bsm" data-h="100">📏 Хурд<br>100px</button>
+          <button onclick="setBnrH(140,this)" class="bh-btn btn bgy bsm" data-h="140">📏 Миёна<br>140px</button>
+          <button onclick="setBnrH(200,this)" class="bh-btn btn bgy bsm" data-h="200">📏 Калон<br>200px</button>
+          <button onclick="setBnrH(280,this)" class="bh-btn btn bgy bsm" data-h="280">📏 Гигант<br>280px</button>
+        </div>
+        <div style="font-size:10px;color:#8b949e;margin-top:6px">Ҳозир: <span id="bh-cur" style="color:#f5c518;font-weight:900">140px</span></div>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn br bsm" onclick="rmBanner()">🗑 Тоза</button>
+      <button class="btn bgy bsm" onclick="CM('m-banner')">Бекор</button>
+      <button class="btn bg bsm" onclick="saveBanner()">💾 Сохтан</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESTAURANT SETTINGS MODAL -->
+<div class="mbg" id="m-restset">
+  <div class="mbox">
+    <div class="mh"><h3>⚙️ Матнҳои асосӣ</h3><button class="mcl" onclick="CM('m-restset')">×</button></div>
+    <div class="mb">
+      <div style="background:#3d2b0030;border:1px solid #f59e0b;border-radius:8px;padding:9px;font-size:10px;color:#fbbf24;text-align:center;margin-bottom:12px">
+        ⚠️ Барои ҳамаи 3 забон алоҳида нависед
+      </div>
+      <div style="font-size:11px;color:#f5c518;font-weight:900;margin-bottom:7px">🏪 Номи ресторан</div>
+      <div class="g3">
+        <div class="fg"><label class="lbl">🇹🇯 Тоҷикӣ</label><input type="text" id="rs-nm" class="inp" placeholder="Шоми Лолагӣ"></div>
+        <div class="fg"><label class="lbl">🇷🇺 Русӣ</label><input type="text" id="rs-nmru" class="inp" placeholder="Шоми Лолагӣ"></div>
+        <div class="fg"><label class="lbl">🇬🇧 Англисӣ</label><input type="text" id="rs-nmen" class="inp" placeholder="Shomi Lolagi"></div>
+      </div>
+      <div style="font-size:11px;color:#f5c518;font-weight:900;margin-bottom:7px;margin-top:5px">📝 Шиор / Тavsif</div>
+      <div class="fg"><label class="lbl">🇹🇯 Тоҷикӣ</label><input type="text" id="rs-tg" class="inp" placeholder="🍽 Тоҷикистон · Тоҷик ва Аврупо"></div>
+      <div class="fg"><label class="lbl">🇷🇺 Русӣ</label><input type="text" id="rs-tgru" class="inp" placeholder="🍽 Таджикистан · Таджикская кухня"></div>
+      <div class="fg"><label class="lbl">🇬🇧 Англисӣ</label><input type="text" id="rs-tgen" class="inp" placeholder="🍽 Tajikistan · Tajik cuisine"></div>
+      <div style="font-size:11px;color:#f5c518;font-weight:900;margin-bottom:7px;margin-top:5px">📞 Маълумоти алоқа</div>
+      <div class="fg"><label class="lbl">Соатҳои корӣ</label><input type="text" id="rs-hr" class="inp" placeholder="10:00-23:00"></div>
+      <div class="g2">
+        <div class="fg"><label class="lbl">Телефон</label><input type="text" id="rs-ph" class="inp" placeholder="+992 900 00 00 00"></div>
+        <div class="fg"><label class="lbl">Суроға</label><input type="text" id="rs-ad" class="inp" placeholder="Душанбе"></div>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn bgy bsm" onclick="CM('m-restset')">Бекор</button>
+      <button class="btn bg bsm" onclick="saveRestSet()">💾 Сохтан</button>
+    </div>
+  </div>
+</div>
+
+<div class="mbg" id="m-addtbl">
+  <div class="mbox"><div class="mh"><h3>🪑 Миз</h3><button class="mcl" onclick="CM('m-addtbl')">×</button></div>
+  <div class="mb"><div class="g2">
+    <div class="fg"><label class="lbl">Рақам *</label><input type="number" id="t-n" class="inp"></div>
+    <div class="fg"><label class="lbl">Ҷойҳо</label><input type="number" id="t-c" class="inp" value="4"></div>
+  </div></div>
+  <div class="mf"><button class="btn bgy bsm" onclick="CM('m-addtbl')">Бекор</button><button class="btn bg bsm" onclick="saveTbl()">✅ Илова</button></div></div>
+</div>
+
+<div class="mbg" id="m-addstaff">
+  <div class="mbox"><div class="mh"><h3>👥 Кормand</h3><button class="mcl" onclick="CM('m-addstaff')">×</button></div>
+  <div class="mb">
+    <div class="fg"><label class="lbl">Ном *</label><input type="text" id="s-nm" class="inp"></div>
+    <div class="fg"><label class="lbl">Нақш *</label><select id="s-rl" class="inp">
+      <option value="waiter">🛎 Афитсиант</option>
+      <option value="kitchen">👨‍🍳 Ошпаз</option>
+      <option value="cashier">💰 Хазиначи</option>
+      <option value="courier">🚗 Курьер</option>
+    </select></div>
+    <div class="g2">
+      <div class="fg"><label class="lbl">Login</label><input type="text" id="s-lg" class="inp" autocomplete="off"></div>
+      <div class="fg"><label class="lbl">Парол</label><input type="text" id="s-ps" class="inp" autocomplete="off"></div>
+    </div>
+    <div class="g2">
+      <div class="fg"><label class="lbl">Telegram ID</label><input type="text" id="s-tg" class="inp"></div>
+      <div class="fg"><label class="lbl">Маош</label><input type="number" id="s-sl" class="inp"></div>
+    </div>
+  </div>
+  <div class="mf"><button class="btn bgy bsm" onclick="CM('m-addstaff')">Бекор</button><button class="btn bg bsm" onclick="saveStaff()">✅ Илова</button></div></div>
+</div>
+
+<div class="mbg" id="m-addpromo">
+  <div class="mbox"><div class="mh"><h3>🎁 Промокод</h3><button class="mcl" onclick="CM('m-addpromo')">×</button></div>
+  <div class="mb"><div class="g2">
+    <div class="fg"><label class="lbl">Код *</label><input type="text" id="p-cd" class="inp" style="text-transform:uppercase"></div>
+    <div class="fg"><label class="lbl">Тахфиф %</label><input type="number" id="p-dc" class="inp"></div>
+  </div></div>
+  <div class="mf"><button class="btn bgy bsm" onclick="CM('m-addpromo')">Бекор</button><button class="btn bg bsm" onclick="savePromo()">✅</button></div></div>
+</div>
+
+<div class="mbg" id="m-addcard">
+  <div class="mbox"><div class="mh"><h3>🏦 Карта</h3><button class="mcl" onclick="CM('m-addcard')">×</button></div>
+  <div class="mb">
+    <input type="hidden" id="bc-id" value="0">
+    <div class="fg"><label class="lbl">Бонк *</label><input type="text" id="bc-bk" class="inp"></div>
+    <div class="fg"><label class="lbl">Рақам *</label><input type="text" id="bc-nm" class="inp" placeholder="4169 7388 1234 5678"></div>
+    <div class="fg"><label class="lbl">Соҳиб *</label><input type="text" id="bc-hd" class="inp"></div>
+  </div>
+  <div class="mf"><button class="btn bgy bsm" onclick="CM('m-addcard')">Бекор</button><button class="btn bg bsm" onclick="saveCard()">💾</button></div></div>
+</div>
+
+<!-- CARD PAY MODAL (customer) -->
+<div class="mbg" id="m-cardpay">
+  <div class="mbox" style="max-width:380px">
+    <div class="mh"><h3>💳 Пардохт бо Карта</h3><button class="mcl" onclick="cancelCardPay()">×</button></div>
+    <div class="mb">
+      <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:13px;padding:16px;margin-bottom:13px;border:1px solid #30363d">
+        <div style="font-size:10px;color:#8b949e;margin-bottom:6px">🏦 <span id="cp-bk">-</span></div>
+        <div style="font-family:monospace;font-size:17px;font-weight:900;color:#f5c518;letter-spacing:2px;margin-bottom:9px" id="cp-nm">-</div>
+        <div style="font-size:10px;color:#e8e8e8;font-weight:700" id="cp-hd">-</div>
+      </div>
+      <div style="background:#0d1117;border-radius:10px;padding:11px;text-align:center;margin-bottom:13px">
+        <div style="font-size:11px;color:#8b949e;margin-bottom:3px">Маблағ:</div>
+        <div style="font-size:22px;font-weight:900;color:#f5c518" id="cp-amt">0 сом</div>
+      </div>
+      <div style="background:#3d2b0030;border:1px solid #f59e0b;border-radius:8px;padding:9px;font-size:11px;color:#fbbf24;text-align:center">
+        💡 Маблағро ба ин карта гузаронед,<br>баъд тугмаро пахш кунед!
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn bgy bsm" onclick="cancelCardPay()">Бекор</button>
+      <button class="btn bgn bsm" onclick="confirmCardPay()">✅ Пардохт кардам</button>
+    </div>
+  </div>
+</div>
+
+<!-- CALL WAITER MODAL -->
+<div class="mbg" id="m-callwaiter">
+  <div class="mbox" style="max-width:340px">
+    <div class="mh"><h3>🛎 Афитсиантро даъват кардан</h3><button class="mcl" onclick="CM('m-callwaiter')">×</button></div>
+    <div class="mb" style="text-align:center">
+      <div style="font-size:48px;margin-bottom:10px">🛎</div>
+      <div style="font-size:13px;color:#8b949e;margin-bottom:16px">Раками мизи худро нависед — афитсиант ба шумо меояд</div>
+      <div class="fg" style="text-align:left">
+        <label class="lbl">Раками миз</label>
+        <input type="number" id="cw-tbl" class="inp" placeholder="5" min="1" max="50" style="font-size:22px;text-align:center;font-weight:900">
+      </div>
+      <div class="fg" style="text-align:left">
+        <label class="lbl">Сабаб (ихтиёрӣ)</label>
+        <select id="cw-reason" class="inp">
+          <option value="general">🛎 Афитсиант даркор</option>
+          <option value="bill">💰 Пардохт мехоҳам</option>
+          <option value="water">💧 Об даркор</option>
+          <option value="order">📝 Заказ илова кардан</option>
+          <option value="problem">⚠️ Мушкилот бор</option>
+        </select>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn bgy bsm" onclick="CM('m-callwaiter')">Бекор</button>
+      <button class="btn bgn bsm" onclick="doCallWaiter()">✅ Даъват кардан</button>
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOMER PAGE -->
+<div id="page-customer" class="page active">
+  <div class="hdr">
+    <div class="hdr-l"><div class="ico">🍽</div><div><div class="nm" id="hdr-name">Шоми Лолагӣ</div><div class="st" id="hdr-status">● Кушода · 10:00-23:00</div></div></div>
+    <div style="display:flex;gap:5px;align-items:center">
+      <button class="lang-btn on" onclick="setLang('tg',this)">🇹🇯</button>
+      <button class="lang-btn" onclick="setLang('ru',this)">🇷🇺</button>
+      <button class="lang-btn" onclick="setLang('en',this)">🇬🇧</button>
+      <button onclick="OM('m-staff')" style="background:#21262d;border:1px solid #30363d;color:#8b949e;padding:7px 11px;border-radius:8px;cursor:pointer;font-size:16px">⋮</button>
+    </div>
+  </div>
+  <div id="cust-banner"></div>
+  <div class="cat-bar" id="cust-cats"></div>
+  <div style="padding:9px 13px;background:#161b22;border-bottom:1px solid #21262d;display:flex;justify-content:space-between;align-items:center">
+    <div style="font-size:11px;color:#8b949e" id="callw-txt">🛎 Афитсиант даркор?</div>
+    <button onclick="OM('m-callwaiter')" class="btn bgn bsm" id="call-btn">🛎 Даъват</button>
+  </div>
+  <div style="padding:11px 13px 85px" id="cust-dishes"></div>
+  <div class="cbar" id="cbar">
+    <div><div style="font-size:11px;font-weight:700;color:#000">🛒 <span id="cb-c">0</span> <span id="cb-item">таом</span></div><div style="font-size:14px;font-weight:900;color:#000"><span id="cb-t">0</span> <span id="cb-sole">сом</span></div></div>
+    <button onclick="SP('cart')" style="background:#000;color:#f5c518;border:none;padding:9px 17px;border-radius:9px;font-size:12px;font-weight:900;cursor:pointer"><span id="cb-btn">Сабад</span> →</button>
+  </div>
+</div>
+
+<!-- CART PAGE -->
+<div id="page-cart" class="page">
+  <div class="hdr">
+    <div style="display:flex;align-items:center;gap:9px">
+      <button onclick="SP('customer')" style="background:#21262d;border:none;color:#e8e8e8;padding:7px 12px;border-radius:8px;cursor:pointer;font-size:14px">‹</button>
+      <span style="font-size:14px;font-weight:900">🛒 Сабад</span>
+    </div>
+    <button onclick="clearCart()" style="background:none;border:none;color:#ef4444;font-size:11px;font-weight:700;cursor:pointer">🗑 Тоза</button>
+  </div>
+  <div style="padding:11px" id="cart-list"></div>
+  <div style="padding:0 11px 85px">
+    <div class="card"><div class="card-b">
+      <div class="fg"><label class="lbl" id="ot-label">Навъи заказ</label><select id="ot" class="inp" onchange="otChg()">
+        <option value="dine_in">🪑 Дар ресторан</option>
+        <option value="delivery">🚗 Доставка</option>
+        <option value="pickup">🏃 Pickup</option>
+      </select></div>
+      <div id="div-tbl" class="fg"><label class="lbl" id="tbl-label">Раками миз (1-50)</label><input type="number" id="inp-tbl" class="inp" min="1" max="50"></div>
+      <div id="div-adr" class="fg" style="display:none"><label class="lbl" id="adr-label">Суроға</label><input type="text" id="inp-adr" class="inp"></div>
+      <div class="fg"><label class="lbl" id="promo-label">Промокод</label>
+        <div style="display:flex;gap:6px">
+          <input type="text" id="inp-promo" class="inp" style="text-transform:uppercase">
+          <button onclick="applyPromo()" class="btn bg bsm">✅</button>
+        </div>
+        <div id="promo-msg" style="font-size:11px;margin-top:4px"></div>
+      </div>
+      <div style="border-top:1px solid #30363d;padding-top:10px;display:flex;justify-content:space-between;font-size:14px;font-weight:900;margin-bottom:11px">
+        <span id="total-label">ҶАМЪ:</span><span style="color:#f5c518" id="cart-total">0 сом</span>
+      </div>
+      <div style="font-size:11px;color:#8b949e;margin-bottom:8px;font-weight:700" id="pay-label">💳 Усули пардохт:</div>
+      <div class="g3">
+        <button onclick="checkout('cash')" class="btn bgn" style="flex-direction:column;gap:2px;padding:11px 4px"><span style="font-size:18px">💵</span><span style="font-size:10px" id="pay-cash">Накдӣ</span></button>
+        <button onclick="checkout('card')" class="btn bb" style="flex-direction:column;gap:2px;padding:11px 4px"><span style="font-size:18px">💳</span><span style="font-size:10px" id="pay-card">Карта</span></button>
+        <button onclick="checkout('qr')" class="btn bp" style="flex-direction:column;gap:2px;padding:11px 4px"><span style="font-size:18px">📱</span><span style="font-size:10px" id="pay-qr">QR</span></button>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- SUCCESS PAGE -->
+<div id="page-success" class="page">
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px">
+    <div style="text-align:center;max-width:330px;width:100%">
+      <div style="font-size:60px;margin-bottom:12px">✅</div>
+      <div style="font-size:22px;font-weight:900;color:#22c55e;margin-bottom:5px" id="suc-msg">Заказ қабул шуд!</div>
+      <div style="color:#8b949e;margin-bottom:3px" id="suc-num">Заказ №1001</div>
+      <div style="font-size:18px;font-weight:900;color:#f5c518;margin-bottom:16px" id="suc-tot">0 сом</div>
+      <div class="card" style="margin-bottom:16px;text-align:left">
+        <div class="card-b">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:3px">⏱ Тахминан:</div>
+          <div style="font-size:19px;font-weight:900;color:#f5c518" id="suc-mins">25-35 дақиқа</div>
+          <div style="color:#8b949e;font-size:11px;margin-top:6px" id="suc-info"></div>
+        </div>
+      </div>
+      <button onclick="SP('customer')" class="btn bg bfull" id="back-btn">🍽 Ба меню бозгашт</button>
+    </div>
+  </div>
+</div>
+
+<!-- KITCHEN PAGE -->
+<div id="page-kitchen" class="page">
+  <div class="hdr">
+    <div class="hdr-l"><div class="ico">👨‍🍳</div><div><div class="nm" style="color:#f59e0b">Ошхона</div><div class="st" style="color:#8b949e">Шоми Лолагӣ</div></div></div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <span class="badge b-r" id="kit-cnt">0</span>
+      <button onclick="renderKitchen()" style="background:#21262d;border:none;color:#8b949e;padding:7px 10px;border-radius:8px;cursor:pointer">🔄</button>
+      <button onclick="logout()" style="background:none;border:none;color:#ef4444;font-size:11px;font-weight:700;cursor:pointer">Чиқиш</button>
+    </div>
+  </div>
+  <div style="padding:12px">
+    <div style="display:flex;gap:7px;margin-bottom:10px">
+      <button onclick="kTab('active',this)" id="kt-active" class="btn bg bsm" style="flex:1">🔥 Фаъол</button>
+      <button onclick="kTab('history',this)" id="kt-history" class="btn bgy bsm" style="flex:1">📜 История</button>
+    </div>
+    <div id="kit-list"></div>
+  </div>
+</div>
+
+<!-- WAITER PAGE -->
+<div id="page-waiter" class="page">
+  <div class="hdr">
+    <div class="hdr-l"><div class="ico">🛎</div><div><div class="nm" style="color:#3b82f6">Афитсиант</div><div class="st" style="color:#8b949e" id="wn">Шоми Лолагӣ</div></div></div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <div id="w-call-badge" style="display:none;background:#ef4444;color:#fff;border-radius:18px;padding:3px 9px;font-size:11px;font-weight:900">🔔 0</div>
+      <button onclick="renderWaiter()" style="background:#21262d;border:none;color:#8b949e;padding:7px 10px;border-radius:8px;cursor:pointer">🔄</button>
+      <button onclick="logout()" style="background:none;border:none;color:#ef4444;font-size:11px;font-weight:700;cursor:pointer">Чиқиш</button>
+    </div>
+  </div>
+  <div style="padding:12px">
+    <div class="g3" style="margin-bottom:10px">
+      <div class="card" style="text-align:center;padding:9px;margin:0"><div style="font-size:18px;font-weight:900;color:#22c55e" id="w-rdy">0</div><div style="font-size:9px;color:#8b949e;margin-top:2px">✅ Тайёр</div></div>
+      <div class="card" style="text-align:center;padding:9px;margin:0"><div style="font-size:18px;font-weight:900;color:#3b82f6" id="w-act">0</div><div style="font-size:9px;color:#8b949e;margin-top:2px">🔥 Фаъол</div></div>
+      <div class="card" style="text-align:center;padding:9px;margin:0"><div style="font-size:18px;font-weight:900;color:#f5c518" id="w-done">0</div><div style="font-size:9px;color:#8b949e;margin-top:2px">🚚 Расонида</div></div>
+    </div>
+    <!-- My earnings banner -->
+    <div style="background:linear-gradient(135deg,#0c1a30,#0d1117);border:1px solid #3b82f6;border-radius:11px;padding:12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <div><div style="font-size:11px;color:#8b949e">💰 Даромади ман имрӯз</div><div style="font-size:20px;font-weight:900;color:#60a5fa;margin-top:3px" id="w-earn">0 сом</div></div>
+      <div style="text-align:right"><div style="font-size:11px;color:#8b949e">📦 Заказҳои ман</div><div style="font-size:16px;font-weight:900;color:#f5c518;margin-top:3px" id="w-myord">0</div></div>
+    </div>
+    <!-- Tabs -->
+    <div style="display:flex;gap:7px;margin-bottom:10px">
+      <button onclick="wTab('active',this)" id="wt-active" class="btn bg bsm" style="flex:1">🔥 Фаъол</button>
+      <button onclick="wTab('history',this)" id="wt-history" class="btn bgy bsm" style="flex:1">📜 История</button>
+    </div>
+    <div id="waiter-calls"></div>
+    <div id="waiter-list"></div>
+  </div>
+</div>
+
+<!-- CASHIER PAGE -->
+<div id="page-cashier" class="page">
+  <div class="hdr">
+    <div class="hdr-l"><div class="ico">💰</div><div><div class="nm" style="color:#22c55e">Хазиначи</div><div class="st" style="color:#8b949e">Шоми Лолагӣ</div></div></div>
+    <div style="display:flex;gap:6px">
+      <button onclick="renderCashier()" style="background:#21262d;border:none;color:#8b949e;padding:7px 10px;border-radius:8px;cursor:pointer">🔄</button>
+      <button onclick="logout()" style="background:none;border:none;color:#ef4444;font-size:11px;font-weight:700;cursor:pointer">Чиқиш</button>
+    </div>
+  </div>
+  <div style="padding:12px">
+    <div class="g3" style="margin-bottom:10px">
+      <div class="card" style="text-align:center;padding:9px;margin:0"><div style="font-size:18px;font-weight:900;color:#ef4444" id="c-unp">0</div><div style="font-size:9px;color:#8b949e;margin-top:2px">⏳ Интизор</div></div>
+      <div class="card" style="text-align:center;padding:9px;margin:0"><div style="font-size:18px;font-weight:900;color:#22c55e" id="c-p">0</div><div style="font-size:9px;color:#8b949e;margin-top:2px">✅ Пардохт</div></div>
+      <div class="card" style="text-align:center;padding:9px;margin:0"><div style="font-size:18px;font-weight:900;color:#f5c518" id="c-tot">0</div><div style="font-size:9px;color:#8b949e;margin-top:2px">💰 Сом</div></div>
+    </div>
+    <!-- Tabs -->
+    <div style="display:flex;gap:7px;margin-bottom:10px">
+      <button onclick="caTab('active',this)" id="cat-active" class="btn bg bsm" style="flex:1">⏳ Интизор</button>
+      <button onclick="caTab('history',this)" id="cat-history" class="btn bgy bsm" style="flex:1">📜 История</button>
+    </div>
+    <div id="cashier-list"></div>
+  </div>
+</div>
+
+<!-- COURIER PAGE -->
+<div id="page-courier" class="page">
+  <div class="hdr">
+    <div class="hdr-l"><div class="ico">🚗</div><div><div class="nm" style="color:#22c55e">Курьер</div><div class="st" style="color:#8b949e" id="crn">Шоми Лолагӣ</div></div></div>
+    <div style="display:flex;gap:6px">
+      <button onclick="renderCourier()" style="background:#21262d;border:none;color:#8b949e;padding:7px 10px;border-radius:8px;cursor:pointer">🔄</button>
+      <button onclick="logout()" style="background:none;border:none;color:#ef4444;font-size:11px;font-weight:700;cursor:pointer">Чиқиш</button>
+    </div>
+  </div>
+  <div style="padding:12px">
+    <div class="g3" style="margin-bottom:10px">
+      <div class="card" style="text-align:center;padding:9px;margin:0"><div style="font-size:18px;font-weight:900;color:#3b82f6" id="cr-n">0</div><div style="font-size:9px;color:#8b949e;margin-top:2px">🆕 Нав</div></div>
+      <div class="card" style="text-align:center;padding:9px;margin:0"><div style="font-size:18px;font-weight:900;color:#f59e0b" id="cr-r">0</div><div style="font-size:9px;color:#8b949e;margin-top:2px">🚗 Роҳда</div></div>
+      <div class="card" style="text-align:center;padding:9px;margin:0"><div style="font-size:18px;font-weight:900;color:#22c55e" id="cr-d">0</div><div style="font-size:9px;color:#8b949e;margin-top:2px">✅ Расонида</div></div>
+    </div>
+    <!-- My earnings -->
+    <div style="background:linear-gradient(135deg,#052e16,#0d1117);border:1px solid #22c55e;border-radius:11px;padding:12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <div><div style="font-size:11px;color:#8b949e">💰 Даромади ман имрӯз</div><div style="font-size:20px;font-weight:900;color:#22c55e;margin-top:3px" id="cr-earn">0 сом</div></div>
+      <div style="text-align:right"><div style="font-size:11px;color:#8b949e">📦 Заказҳои ман</div><div style="font-size:16px;font-weight:900;color:#f5c518;margin-top:3px" id="cr-myord">0</div></div>
+    </div>
+    <!-- Tabs -->
+    <div style="display:flex;gap:7px;margin-bottom:10px">
+      <button onclick="crTab('active',this)" id="crt-active" class="btn bg bsm" style="flex:1">🚗 Фаъол</button>
+      <button onclick="crTab('history',this)" id="crt-history" class="btn bgy bsm" style="flex:1">📜 История</button>
+    </div>
+    <div id="courier-list"></div>
+  </div>
+</div>
+
+<!-- ADMIN PAGE -->
+<div id="page-admin" class="page">
+  <div class="asd">
+    <div class="asd-logo"><div class="n">🍽 Шоми Лолагӣ</div><div class="s">Admin</div></div>
+    <div class="asd-it on" onclick="AP('dash',this)"><span>📊</span> Dashboard</div>
+    <div class="asd-it" onclick="AP('orders',this)"><span>📦</span> Заказҳо</div>
+    <div class="asd-it" onclick="AP('history',this)"><span>📜</span> История</div>
+    <div class="asd-it" onclick="AP('menu',this)"><span>🍽</span> Таомҳо</div>
+    <div class="asd-it" onclick="AP('cats',this)"><span>📂</span> Категория</div>
+    <div class="asd-it" onclick="AP('tables',this)"><span>🪑</span> Мизҳо</div>
+    <div class="asd-it" onclick="AP('staff',this)"><span>👥</span> Кормандон</div>
+    <div class="asd-it" onclick="AP('promos',this)"><span>🎁</span> Промокод</div>
+    <div class="asd-it" onclick="AP('cards',this)"><span>🏦</span> Картаҳо</div>
+    <div class="asd-it" onclick="logout()"><span>🚪</span> Чиқиш</div>
+  </div>
+  <div class="am">
+    <div class="atop">
+      <h2 style="font-size:14px;font-weight:900" id="adm-t">📊 Dashboard</h2>
+      <span style="font-size:11px;color:#22c55e">🟢 Онлайн</span>
+    </div>
+    <div class="acn">
+      <div class="apg on" id="ap-dash">
+        <div class="sg">
+          <div class="sc"><div class="l">📦 Заказҳо</div><div class="v" style="color:#3b82f6" id="d-ord">0</div></div>
+          <div class="sc"><div class="l">💰 Даромад</div><div class="v" style="color:#22c55e" id="d-rev">0</div></div>
+          <div class="sc"><div class="l">✅ Пардохт</div><div class="v" style="color:#f5c518" id="d-paid">0</div></div>
+          <div class="sc"><div class="l">⏳ Интизор</div><div class="v" style="color:#ef4444" id="d-wait">0</div></div>
+        </div>
+        <div class="card"><div class="card-h"><h3>🔥 Охирин заказҳо</h3></div>
+        <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>№</th><th>Навъ</th><th>Маблағ</th><th>Усул</th><th>Пардохт</th><th>Статус</th></tr></thead><tbody id="d-tbl"></tbody></table></div></div>
+      </div>
+      <div class="apg" id="ap-orders">
+        <div class="card"><div class="card-h"><h3>📦 Заказҳои фаъол</h3><input type="text" id="ord-search" placeholder="🔍 Ҷустуҷӯ..." oninput="rAdmOrders()" style="background:#0d1117;border:1px solid #30363d;color:#e8e8e8;padding:6px 10px;border-radius:7px;font-size:11px;font-family:inherit;outline:none;width:140px"></div>
+        <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>№</th><th>Навъ</th><th>Таом</th><th>Маблағ</th><th>Усул</th><th>Пардохт</th><th>Статус</th></tr></thead><tbody id="o-tbl"></tbody></table></div></div>
+      </div>
+      <div class="apg" id="ap-history">
+        <div class="card"><div class="card-h"><h3>📜 История (Заказҳои тамомшуда)</h3><span class="badge b-g" id="h-cnt">0</span></div>
+        <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>№</th><th>Вақт</th><th>Навъ</th><th>Таом</th><th>Маблағ</th><th>Усул</th><th>Расонид</th></tr></thead><tbody id="h-tbl"></tbody></table></div>
+        <div style="padding:11px 13px;border-top:2px solid #f5c518;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:900;flex-wrap:wrap;gap:8px"><span>ҶАМЪ:</span><span style="color:#f5c518" id="h-total">0 сом</span><button onclick="clearHistory()" class="btn br bsm">🗑 Историяро тоза кардан</button></div>
+        </div>
+      </div>
+      <div class="apg" id="ap-menu">
+        <div class="card"><div class="card-h"><h3>🍽 Таомҳо (<span id="m-cnt">0</span>)</h3><button onclick="openAddDish()" class="btn bg bsm">➕ Таом</button></div><div id="m-list"></div></div>
+      </div>
+      <div class="apg" id="ap-cats">
+        <div class="card">
+          <div class="card-h"><h3>⚙️ Матнҳои асосӣ</h3><button onclick="openRestSet()" class="btn bg bsm">✏️ Таҳрир</button></div>
+          <div style="padding:11px" id="rest-preview"></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h3>🖼 Банери асосии мизоҷ</h3><button onclick="openBanner()" class="btn bg bsm">📷 Иваз кардан</button></div>
+          <div id="banner-preview" style="padding:11px"></div>
+        </div>
+        <div class="card"><div class="card-h"><h3>📂 Категория</h3><button onclick="openAddCat()" class="btn bg bsm">➕ Категория</button></div>
+        <div id="c-list"></div></div>
+      </div>
+      <div class="apg" id="ap-tables">
+        <div class="card"><div class="card-h"><h3>🪑 Мизҳо</h3><button onclick="OM('m-addtbl')" class="btn bg bsm">➕</button></div>
+        <div style="padding:11px;display:grid;grid-template-columns:repeat(auto-fill,minmax(75px,1fr));gap:7px" id="t-grid"></div></div>
+      </div>
+      <div class="apg" id="ap-staff">
+        <div class="card"><div class="card-h"><h3>👥 Кормандон</h3><button onclick="OM('m-addstaff')" class="btn bg bsm">➕</button></div>
+        <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Ном</th><th>Нақш</th><th>Login</th><th>Парол</th><th>Маош</th><th>Амал</th></tr></thead><tbody id="s-tbl"></tbody></table></div></div>
+      </div>
+      <div class="apg" id="ap-promos">
+        <div class="card"><div class="card-h"><h3>🎁 Промокод</h3><button onclick="OM('m-addpromo')" class="btn bg bsm">➕</button></div>
+        <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Код</th><th>%</th><th>Ишл.</th><th>Статус</th><th>Амал</th></tr></thead><tbody id="p-tbl"></tbody></table></div></div>
+      </div>
+      <div class="apg" id="ap-cards">
+        <div class="card"><div class="card-h"><h3>🏦 Картаҳо</h3><button onclick="openAddCard()" class="btn bg bsm">➕</button></div><div class="card-b" id="bc-list"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+// ════════════════════════════════════
+// DATA
+// ════════════════════════════════════
+var ROLE_PASS = {admin:'admin2024',kitchen:'kitchen2024',waiter:'waiter2024',cashier:'cashier2024',courier:'courier2024'};
+var cats = [
+  {id:1,em:'🥘',name:'Шӯрборо',name_ru:'Супы',name_en:'Soups'},
+  {id:2,em:'🍖',name:'Кабоб',name_ru:'Кебабы',name_en:'Kebabs'},
+  {id:3,em:'🍚',name:'Ош',name_ru:'Плов',name_en:'Pilaf'},
+  {id:4,em:'🥤',name:'Нӯшокӣ',name_ru:'Напитки',name_en:'Drinks'},
+];
+var dishes = [
+  {id:1,cat:1,name:'Шӯрбои гӯшт',name_ru:'Шурпа',name_en:'Meat Soup',price:18000,time:25,img:'🥘',photo:null,avail:true},
+  {id:2,cat:1,name:'Мастоба',name_ru:'Мастоба',name_en:'Mastoba',price:15000,time:20,img:'🍲',photo:null,avail:true},
+  {id:3,cat:2,name:'Кабоби Тоҷикӣ',name_ru:'Кебаб Таджикский',name_en:'Tajik Kebab',price:35000,time:30,img:'🍖',photo:null,avail:true},
+  {id:4,cat:2,name:'Шашлик',name_ru:'Шашлык',name_en:'Shashlik',price:40000,time:35,img:'🔥',photo:null,avail:false},
+  {id:5,cat:3,name:'Ошпалав',name_ru:'Плов',name_en:'Pilaf',price:22000,time:40,img:'🍚',photo:null,avail:true},
+  {id:6,cat:3,name:'Манту',name_ru:'Манты',name_en:'Manti',price:20000,time:30,img:'🥟',photo:null,avail:true},
+  {id:7,cat:4,name:'Чой',name_ru:'Чай',name_en:'Tea',price:3000,time:5,img:'🍵',photo:null,avail:true},
+  {id:8,cat:4,name:'Зардоб',name_ru:'Йогурт',name_en:'Yogurt',price:5000,time:3,img:'🥛',photo:null,avail:true},
+];
+var staffList = [
+  {id:1,name:'Давлат Назаров',role:'waiter',login:'davlat',pass:'davlat123',tg:'111',sal:500000},
+  {id:2,name:'Нилуфар Ашурова',role:'kitchen',login:'nilufer',pass:'nilufer123',tg:'222',sal:600000},
+  {id:3,name:'Баҳром Тошев',role:'cashier',login:'bahrom',pass:'bahrom123',tg:'333',sal:550000},
+];
+var tables = [
+  {n:1,cap:2,st:'free'},{n:2,cap:4,st:'occupied'},{n:3,cap:4,st:'free'},{n:4,cap:6,st:'free'},
+  {n:5,cap:4,st:'occupied'},{n:6,cap:2,st:'free'},{n:7,cap:8,st:'reserved'},{n:8,cap:4,st:'free'},
+];
+var promosList = [
+  {id:1,code:'LOLAGI20',disc:20,used:12,active:true},
+  {id:2,code:'SUMMER10',disc:10,used:45,active:true},
+];
+var bankCards = [{id:1,bank:'Амонатбонк',num:'4169 7388 1234 5678',hold:'LOLAGI RESTAURANT'}];
+var orders = [];
+var waiterCalls = [];
+var cart = {};
+var cartDisc = 0;
+var ordCnt = 1000;
+var idCnt = 200;
+var curCat = null;
+var curLang = 'tg';
+var currentRole = 'customer';
+var currentStaff = null;
+var pendingCard = null;
+var tempPhoto = null;
+var tempCatPhoto = null;
+var tempBnrPhoto = null;
+var bannerImg = null;
+var bannerHeight = 140;
+var restSettings = {
+  name: 'Шоми Лолагӣ',
+  name_ru: 'Шоми Лолагӣ',
+  name_en: 'Shomi Lolagi',
+  tagline: '🍽 Тоҷикистон · Тоҷик ва Аврупо',
+  tagline_ru: '🍽 Таджикистан · Таджикская и Европейская кухня',
+  tagline_en: '🍽 Tajikistan · Tajik and European cuisine',
+  hours: '10:00-23:00',
+  phone: '+992 900 00 00 00',
+  address: 'Душанбе, Тоҷикистон'
+};
+
+// UTILS
+function now(){return new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});}
+function nid(){return ++idCnt;}
+function toast(m,c){
+  c=c||'g';
+  var ct=document.getElementById('toasts');
+  var el=document.createElement('div');
+  el.className='toast t-'+c;
+  el.textContent=m;
+  ct.appendChild(el);
+  setTimeout(function(){el.remove();},3000);
+}
+function SP(n){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('page-'+n).classList.add('active');
+  if(n==='cart')renderCart();
+}
+function OM(id){document.getElementById(id).classList.add('on');}
+function CM(id){document.getElementById(id).classList.remove('on');}
+
+// LANG
+// TRANSLATIONS
+var TR = {
+  tg: {
+    all:'Ҳамааш', out:'Тамом', mins:'дақ', sole:'сом', cart:'Сабад', empty:'Сабад холӣ',
+    callw:'Афитсиант даркор?', call:'🛎 Даъват', open:'● Кушода',
+    ordtype:'Навъи заказ', dinein:'🪑 Дар ресторан', delivery:'🚗 Доставка', pickup:'🏃 Pickup',
+    tblnum:'Раками миз (1-50)', addr:'Суроға', promo:'Промокод', total:'ҶАМЪ',
+    payby:'💳 Усули пардохт:', cash:'Накдӣ', card:'Карта', qr:'QR',
+    order:'Заказ', accepted:'қабул шуд!', minutes:'25-35 дақиқа', back:'🍽 Ба меню бозгашт',
+    tnum:'Заказ №', tabletp:'🪑 Миз №', ttotal:'Ҷамъ',
+    notbl:'❌ Раками миз!', noaddr:'❌ Суроға!', noempty:'❌ Сабад холӣ!',
+    promoOk:'✅ Тахфиф:', promoBad:'❌ Нодуруст',
+    callsent:'🛎 Афитсиант ба миз даъват шуд!', callprompt:'Раками миз?',
+    welcome:'Хуш омадед,', loggedOut:'👋'
+  },
+  ru: {
+    all:'Все', out:'Нет', mins:'мин', sole:'сом', cart:'Корзина', empty:'Корзина пуста',
+    callw:'Официант нужен?', call:'🛎 Позвать', open:'● Открыто',
+    ordtype:'Тип заказа', dinein:'🪑 В ресторане', delivery:'🚗 Доставка', pickup:'🏃 Самовывоз',
+    tblnum:'Номер стола (1-50)', addr:'Адрес', promo:'Промокод', total:'ИТОГО',
+    payby:'💳 Способ оплаты:', cash:'Наличные', card:'Карта', qr:'QR',
+    order:'Заказ', accepted:'принят!', minutes:'25-35 минут', back:'🍽 К меню',
+    tnum:'Заказ №', tabletp:'🪑 Стол №', ttotal:'Итого',
+    notbl:'❌ Номер стола!', noaddr:'❌ Адрес!', noempty:'❌ Корзина пуста!',
+    promoOk:'✅ Скидка:', promoBad:'❌ Неверный',
+    callsent:'🛎 Официант вызван к столу!', callprompt:'Номер стола?',
+    welcome:'Добро пожаловать,', loggedOut:'👋'
+  },
+  en: {
+    all:'All', out:'Out', mins:'min', sole:'som', cart:'Cart', empty:'Cart is empty',
+    callw:'Need waiter?', call:'🛎 Call', open:'● Open',
+    ordtype:'Order type', dinein:'🪑 Dine in', delivery:'🚗 Delivery', pickup:'🏃 Pickup',
+    tblnum:'Table number (1-50)', addr:'Address', promo:'Promo code', total:'TOTAL',
+    payby:'💳 Payment method:', cash:'Cash', card:'Card', qr:'QR',
+    order:'Order', accepted:'accepted!', minutes:'25-35 minutes', back:'🍽 Back to menu',
+    tnum:'Order #', tabletp:'🪑 Table #', ttotal:'Total',
+    notbl:'❌ Table number!', noaddr:'❌ Address!', noempty:'❌ Cart empty!',
+    promoOk:'✅ Discount:', promoBad:'❌ Invalid',
+    callsent:'🛎 Waiter called to table!', callprompt:'Table number?',
+    welcome:'Welcome,', loggedOut:'👋'
+  }
+};
+function T(k){var d=TR[curLang]||TR.tg;return d[k]||k;}
+// Get dish/cat name by current language
+function dishName(d){
+  if(curLang==='ru')return d.name_ru||d.name;
+  if(curLang==='en')return d.name_en||d.name;
+  return d.name;
+}
+function catName(c){
+  if(curLang==='ru')return c.name_ru||c.name;
+  if(curLang==='en')return c.name_en||c.name;
+  return c.name;
+}
+function itemName(i){
+  if(curLang==='ru')return i.name_ru||i.name;
+  if(curLang==='en')return i.name_en||i.name;
+  return i.name;
+}
+
+function setLang(l,b){
+  curLang=l;
+  document.querySelectorAll('.lang-btn').forEach(function(x){x.classList.remove('on');});
+  if(b)b.classList.add('on');
+  applyLang();
+  renderCustomer(curCat);
+  if(document.getElementById('page-cart').classList.contains('active'))renderCart();
+}
+
+function applyLang(){
+  // Map of element IDs to translation keys
+  var els={
+    'callw-txt':function(){return '🛎 '+T('callw');},
+    'call-btn':function(){return T('call');},
+    'ot-label':function(){return T('ordtype');},
+    'tbl-label':function(){return T('tblnum');},
+    'adr-label':function(){return T('addr');},
+    'promo-label':function(){return T('promo');},
+    'pay-label':function(){return '💳 '+T('payby');},
+    'pay-cash':function(){return T('cash');},
+    'pay-card':function(){return T('card');},
+    'pay-qr':function(){return T('qr');},
+    'total-label':function(){return T('total')+':';},
+    'suc-msg':function(){return T('order')+' '+T('accepted');},
+    'suc-mins':function(){return T('minutes');},
+    'back-btn':function(){return T('back');},
+    'cb-item':function(){return curLang==='ru'?'блюд':curLang==='en'?'items':'таом';},
+    'cb-sole':function(){return T('sole');},
+    'cb-btn':function(){return T('cart');}
+  };
+  Object.keys(els).forEach(function(id){
+    var el=document.getElementById(id);
+    if(el)el.textContent=els[id]();
+  });
+  // Update dropdown options
+  var ot=document.getElementById('ot');
+  if(ot){
+    if(ot.options[0])ot.options[0].textContent=T('dinein');
+    if(ot.options[1])ot.options[1].textContent=T('delivery');
+    if(ot.options[2])ot.options[2].textContent=T('pickup');
+  }
+  // Update customer header status
+  var hdrName=document.getElementById('hdr-name');
+  if(hdrName)hdrName.textContent=restName();
+  var stHdr=document.getElementById('hdr-status');
+  if(stHdr)stHdr.innerHTML=T('open')+' · '+restSettings.hours;
+}
+
+// AUTH
+function sLogin(){
+  var role=document.getElementById('sl-role').value;
+  var pass=document.getElementById('sl-pass').value;
+  var err=document.getElementById('sl-err');
+  var staff=staffList.find(function(s){return s.role===role && s.pass===pass;});
+  var roleOk=ROLE_PASS[role]===pass;
+  if(staff||roleOk){
+    err.style.display='none';
+    document.getElementById('sl-pass').value='';
+    CM('m-staff');
+    currentRole=role;
+    currentStaff=staff||{name:role,role:role};
+    if(role==='admin'){SP('admin');rAdmAll();}
+    else if(role==='kitchen'){SP('kitchen');renderKitchen();}
+    else if(role==='waiter'){SP('waiter');var w=document.getElementById('wn');if(w)w.textContent=currentStaff.name;renderWaiter();}
+    else if(role==='cashier'){SP('cashier');renderCashier();}
+    else if(role==='courier'){SP('courier');var c=document.getElementById('crn');if(c)c.textContent=currentStaff.name;renderCourier();}
+    toast('✅ Хуш омадед, '+currentStaff.name+'!');
+  } else {
+    err.style.display='block';
+    document.getElementById('sl-pass').value='';
+  }
+}
+function logout(){currentRole='customer';currentStaff=null;SP('customer');toast('👋','b');}
+
+// CUSTOMER
+function renderCustomer(fc){
+  if(fc===undefined)fc=null;
+  curCat=fc;
+  // Banner
+  var bnr=document.getElementById('cust-banner');
+  if(bnr){
+    if(bannerImg){
+      bnr.innerHTML='<div style="position:relative;height:'+bannerHeight+'px;overflow:hidden"><img src="'+bannerImg+'" style="width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(13,17,23,.95));display:flex;align-items:flex-end;padding:13px"><div><div style="font-size:20px;font-weight:900;color:#f5c518;text-shadow:0 2px 6px rgba(0,0,0,.8)">'+restName()+'</div><div style="font-size:11px;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.8);margin-top:3px">'+restTagline()+'</div></div></div></div>';
+    } else {
+      bnr.innerHTML='';
+    }
+  }
+  var ce=document.getElementById('cust-cats');
+  var html='<button class="ctab '+(fc===null?'on':'')+'" onclick="renderCustomer(null)">'+T('all')+'</button>';
+  cats.forEach(function(c){
+    var icon=c.photo?'<img src="'+c.photo+'" style="width:20px;height:20px;object-fit:cover;border-radius:50%;vertical-align:middle;margin-right:4px">':c.em+' ';
+    html+='<button class="ctab '+(fc===c.id?'on':'')+'" onclick="renderCustomer('+c.id+')">'+icon+catName(c)+'</button>';
+  });
+  ce.innerHTML=html;
+  var fl=fc?dishes.filter(function(d){return d.cat===fc;}):dishes;
+  var dhtml='';
+  fl.forEach(function(d){
+    var hasPhoto=!!d.photo;
+    var addBtn=d.avail
+      ?'<button onclick="addCart('+d.id+')" style="background:#f5c518;color:#000;border:none;padding:9px 14px;border-radius:9px;font-size:13px;font-weight:900;cursor:pointer;font-family:inherit">➕ '+T('cart')+'</button>'
+      :'<span class="badge b-r" style="padding:7px 12px">'+T('out')+'</span>';
+    if(hasPhoto){
+      // BIG card with photo on top
+      dhtml+='<div style="background:#161b22;border:1px solid #21262d;border-radius:13px;overflow:hidden;margin-bottom:11px">'
+        +'<div style="width:100%;height:180px;background:#0d1117;overflow:hidden;position:relative">'
+        +'<img src="'+d.photo+'" style="width:100%;height:100%;object-fit:cover">'
+        +(d.avail?'':'<div style="position:absolute;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center"><span class="badge b-r" style="padding:8px 16px;font-size:13px">'+T('out')+'</span></div>')
+        +'</div>'
+        +'<div style="padding:11px 13px">'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:9px;margin-bottom:6px">'
+        +'<div style="flex:1;min-width:0">'
+        +'<div style="font-size:15px;font-weight:900;margin-bottom:3px">'+dishName(d)+'</div>'
+        +'<div style="font-size:10px;color:#8b949e">⏱ '+d.time+' '+T('mins')+'</div>'
+        +'</div>'
+        +'<div style="font-size:16px;font-weight:900;color:#f5c518;white-space:nowrap">'+d.price.toLocaleString()+' '+T('sole')+'</div>'
+        +'</div>'
+        +'<div style="display:flex;justify-content:flex-end">'+addBtn+'</div>'
+        +'</div></div>';
+    } else {
+      // Compact card with emoji
+      dhtml+='<div class="dish">'
+        +'<div class="dish-ico" style="font-size:36px;width:64px;height:64px">'+(d.img||'🍽')+'</div>'
+        +'<div style="flex:1;min-width:0">'
+        +'<div style="font-size:14px;font-weight:900;margin-bottom:3px">'+dishName(d)+'</div>'
+        +'<div style="font-size:10px;color:#8b949e;margin-bottom:5px">⏱ '+d.time+' '+T('mins')+'</div>'
+        +'<div style="font-size:15px;font-weight:900;color:#f5c518">'+d.price.toLocaleString()+' '+T('sole')+'</div>'
+        +'</div>'
+        +'<div style="flex-shrink:0">'+addBtn+'</div>'
+        +'</div>';
+    }
+  });
+  document.getElementById('cust-dishes').innerHTML=dhtml||'<div style="text-align:center;padding:35px;color:#555">'+T('out')+'</div>';
+}
+
+function addCart(did){
+  var d=dishes.find(function(x){return x.id===did;});
+  if(!d||!d.avail)return;
+  var k=String(did);
+  if(cart[k])cart[k].qty++;
+  else cart[k]={did:did,name:d.name,name_ru:d.name_ru,name_en:d.name_en,price:d.price,qty:1};
+  updateCbar();
+  toast('✅ '+dishName(d));
+}
+function updateCbar(){
+  var tot=0,cnt=0;
+  Object.values(cart).forEach(function(i){tot+=i.price*i.qty;cnt+=i.qty;});
+  var bar=document.getElementById('cbar');
+  if(cnt>0){bar.classList.add('show');document.getElementById('cb-c').textContent=cnt;document.getElementById('cb-t').textContent=tot.toLocaleString();}
+  else bar.classList.remove('show');
+}
+function clearCart(){cart={};cartDisc=0;updateCbar();renderCart();toast('🗑','y');}
+var reasonLabels = {
+  general:'🛎 Афитсиант даркор',
+  bill:'💰 Пардохт мехоҳам',
+  water:'💧 Об даркор',
+  order:'📝 Заказ илова кардан',
+  problem:'⚠️ Мушкилот бор'
+};
+
+function callWaiter(){OM('m-callwaiter');}
+
+function doCallWaiter(){
+  var t=document.getElementById('cw-tbl').value;
+  var reason=document.getElementById('cw-reason').value;
+  if(!t||isNaN(parseInt(t))||parseInt(t)<1){toast('❌ Раками миз!','r');return;}
+  var call={
+    id:nid(),
+    table:parseInt(t),
+    reason:reason,
+    reasonLabel:reasonLabels[reason]||'🛎 Афитсиант даркор',
+    time:now(),
+    status:'waiting',
+    assignedTo:null,
+    assignedAt:null
+  };
+  waiterCalls.unshift(call);
+  CM('m-callwaiter');
+  document.getElementById('cw-tbl').value='';
+  // Notify waiter panel
+  if(currentRole==='waiter')renderWaiter();
+  toast('✅ Афитсиант ба миз №'+t+' даъват шуд! Каме интизор шавед...','g');
+}
+
+// CART
+function renderCart(){
+  var el=document.getElementById('cart-list');
+  if(!el)return;
+  var keys=Object.keys(cart);
+  if(!keys.length){el.innerHTML='<div style="text-align:center;padding:35px;color:#555">🛒 '+T('empty')+'</div>';updateCartTotal();return;}
+  var html='';
+  keys.forEach(function(k){
+    var it=cart[k];
+    html+='<div style="background:#161b22;border:1px solid #21262d;border-radius:10px;padding:11px;margin-bottom:7px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">'
+      +'<div style="flex:1;min-width:120px">'
+      +'<div style="font-size:12px;font-weight:800">'+itemName(it)+'</div>'
+      +'<div style="font-size:10px;color:#8b949e;margin-top:2px">'+it.price.toLocaleString()+' × '+it.qty+'</div></div>'
+      +'<div style="display:flex;align-items:center;gap:5px">'
+      +'<span style="font-size:13px;font-weight:900;color:#f5c518">'+(it.price*it.qty).toLocaleString()+'</span>'
+      +'<button onclick="qC(\''+k+'\',-1)" style="background:#21262d;border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:16px;font-weight:900">−</button>'
+      +'<span style="font-weight:900;min-width:18px;text-align:center">'+it.qty+'</span>'
+      +'<button onclick="qC(\''+k+'\',1)" style="background:#21262d;border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:16px;font-weight:900">+</button>'
+      +'<button onclick="rI(\''+k+'\')" style="background:#ef4444;border:none;color:#fff;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:12px">🗑</button>'
+      +'</div></div></div>';
+  });
+  el.innerHTML=html;
+  updateCartTotal();
+}
+function qC(k,d){if(!cart[k])return;cart[k].qty+=d;if(cart[k].qty<=0)delete cart[k];renderCart();updateCbar();}
+function rI(k){delete cart[k];renderCart();updateCbar();toast('🗑','r');}
+function updateCartTotal(){
+  var tot=0;
+  Object.values(cart).forEach(function(i){tot+=i.price*i.qty;});
+  var fin=Math.round(tot*(1-cartDisc/100));
+  var el=document.getElementById('cart-total');
+  if(el)el.textContent=fin.toLocaleString()+(cartDisc?' (-'+cartDisc+'%)':'')+' '+T('sole');
+}
+function otChg(){
+  var v=document.getElementById('ot').value;
+  document.getElementById('div-tbl').style.display=v==='dine_in'?'block':'none';
+  document.getElementById('div-adr').style.display=v==='delivery'?'block':'none';
+}
+function applyPromo(){
+  var code=document.getElementById('inp-promo').value.toUpperCase().trim();
+  var msg=document.getElementById('promo-msg');
+  var p=promosList.find(function(x){return x.code===code&&x.active;});
+  if(p){cartDisc=p.disc;msg.innerHTML='<span style="color:#22c55e">'+T('promoOk')+' '+cartDisc+'%</span>';updateCartTotal();}
+  else{cartDisc=0;msg.innerHTML='<span style="color:#ef4444">'+T('promoBad')+'</span>';updateCartTotal();}
+}
+
+// CHECKOUT — Customer chooses payment method, but ORDER GOES TO ALL IMMEDIATELY
+function checkout(method){
+  if(!Object.keys(cart).length){toast(T('noempty'),'r');return;}
+  var otype=document.getElementById('ot').value;
+  var tbl=document.getElementById('inp-tbl').value;
+  var adr=document.getElementById('inp-adr').value;
+  if(otype==='dine_in'&&!tbl){toast(T('notbl'),'r');return;}
+  if(otype==='delivery'&&!adr){toast(T('noaddr'),'r');return;}
+  var subtot=0;
+  Object.values(cart).forEach(function(i){subtot+=i.price*i.qty;});
+  var final=Math.round(subtot*(1-cartDisc/100));
+  // If card - show card details first
+  if(method==='card'){
+    pendingCard={otype:otype,tbl:parseInt(tbl)||0,adr:adr,subtot:subtot,final:final,method:method,items:JSON.parse(JSON.stringify(cart))};
+    var bc=bankCards[0];
+    if(bc){
+      document.getElementById('cp-bk').textContent=bc.bank;
+      document.getElementById('cp-nm').textContent=bc.num;
+      document.getElementById('cp-hd').textContent=bc.hold;
+    }
+    document.getElementById('cp-amt').textContent=final.toLocaleString()+' сом';
+    OM('m-cardpay');
+    return;
+  }
+  doFinalize(otype,parseInt(tbl)||0,adr,subtot,final,method,JSON.parse(JSON.stringify(cart)));
+}
+function cancelCardPay(){CM('m-cardpay');pendingCard=null;}
+function confirmCardPay(){
+  if(!pendingCard)return;
+  var p=pendingCard;CM('m-cardpay');
+  doFinalize(p.otype,p.tbl,p.adr,p.subtot,p.final,p.method,p.items);
+  pendingCard=null;
+}
+
+// CREATE ORDER — goes to KITCHEN, WAITER, CASHIER, COURIER all at once
+// Payment is ALWAYS unpaid initially. Cashier confirms later (whenever).
+function doFinalize(otype,tblNum,adr,subtot,final,method,items){
+  var oid=++ordCnt;
+  var kItems={};
+  Object.keys(items).forEach(function(k){kItems[k]=Object.assign({},items[k],{status:'pending'});});
+  var o={
+    id:oid,otype:otype,table:tblNum,addr:adr,
+    items:kItems,subtotal:subtot,total:final,disc:cartDisc,
+    status:'new',           // kitchen status: new -> cooking -> ready -> delivering -> delivered
+    paid:false,             // cashier sets this true
+    method:method,          // payment method customer chose
+    paymentClaimed:method!=='cash',  // true if customer says they already paid (card/qr)
+    time:now(),user:'Мизоҷ',
+    waiter:null,courier:null
+  };
+  orders.unshift(o);
+  document.getElementById('suc-num').textContent=T('tnum')+oid;
+  document.getElementById('suc-tot').textContent=final.toLocaleString()+' '+T('sole');
+  var infoMap={dine_in:T('tabletp')+tblNum,delivery:'🚗 '+adr,pickup:T('pickup')};
+  document.getElementById('suc-info').textContent=infoMap[otype]||'';
+  cart={};cartDisc=0;
+  document.getElementById('inp-promo').value='';
+  document.getElementById('promo-msg').innerHTML='';
+  updateCbar();
+  SP('success');
+  toast('✅ Заказ №'+oid+' қабул шуд!');
+}
+
+// ════════════════════════════════════
+// KITCHEN — Works on orders regardless of payment status
+// ════════════════════════════════════
+var kitchenCurTab='active';
+function kTab(tab,btn){
+  kitchenCurTab=tab;
+  document.getElementById('kt-active').className='btn bgy bsm';
+  document.getElementById('kt-history').className='btn bgy bsm';
+  if(btn)btn.className='btn bg bsm';
+  else document.getElementById('kt-'+tab).className='btn bg bsm';
+  renderKitchen();
+}
+
+function renderKitchen(){
+  var newOrds=orders.filter(function(o){return o.status==='new'||o.status==='cooking';});
+  document.getElementById('kit-cnt').textContent=newOrds.length;
+  var el=document.getElementById('kit-list');
+  // History tab
+  if(kitchenCurTab==='history'){
+    var doneOrds=orders.filter(function(o){return o.status==='delivered'&&o.paid;}).sort(function(a,b){return b.id-a.id;});
+    if(!doneOrds.length){el.innerHTML='<div style="text-align:center;padding:35px;color:#555">📜 История холӣ</div>';return;}
+    var hh='<div style="background:#052e16;border:1px solid #22c55e;border-radius:9px;padding:9px 11px;margin-bottom:9px;font-size:11px;color:#4ade80;font-weight:700">📜 Тайёр карда шуд — '+doneOrds.length+' заказ</div>';
+    doneOrds.forEach(function(o){
+      var tp={dine_in:'🪑 Миз №'+o.table,delivery:'🚗 Доставка',pickup:'🏃 Pickup'}[o.otype]||'';
+      var itsHtml='';
+      Object.values(o.items).forEach(function(i){
+        itsHtml+='<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:11px"><span>'+i.name+' ×'+i.qty+'</span><span style="color:#f5c518">'+(i.price*i.qty).toLocaleString()+'</span></div>';
+      });
+      hh+='<div style="background:#161b22;border:1px solid #21262d;border-left:4px solid #22c55e;border-radius:10px;padding:12px;margin-bottom:8px;opacity:.85">'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:7px;flex-wrap:wrap">'
+        +'<div><div style="font-weight:900;font-size:13px">№'+o.id+' <span class="badge b-g">✅</span></div>'
+        +'<div style="font-size:11px;color:#8b949e;margin-top:2px">'+tp+'</div>'
+        +'<div style="font-size:10px;color:#8b949e;margin-top:2px">'+o.time+(o.readyAt?' → '+o.readyAt:'')+'</div></div>'
+        +'<div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#f5c518">'+o.total.toLocaleString()+'</div></div></div>'
+        +'<div style="background:#0d1117;border-radius:7px;padding:7px 9px;margin-top:7px">'+itsHtml+'</div></div>';
+    });
+    el.innerHTML=hh;return;
+  }
+  if(!newOrds.length){el.innerHTML='<div style="text-align:center;padding:35px;color:#555">✅ Заказ нест</div>';return;}
+  var html='';
+  newOrds.forEach(function(o){
+    var tp={dine_in:'🪑 Миз №'+o.table,delivery:'🚗 Доставка',pickup:'🏃 Pickup'}[o.otype]||'';
+    var paidB=o.paid?'<span class="badge b-g">✅ Пардохт</span>':'<span class="badge b-r">⏳ Пардохт нест</span>';
+    var sLbl=o.status==='new'?'🆕 Нав':'👨‍🍳 Пухта';
+    var sCls=o.status==='new'?'b-r':'b-y';
+    var items='';
+    var allReady=true;
+    Object.keys(o.items).forEach(function(k){
+      var i=o.items[k];
+      var stCls={pending:'b-y',cooking:'b-bl',ready:'b-g',unavail:'b-r'}[i.status]||'b-gr';
+      var stLbl={pending:'⏳ Интизор',cooking:'👨‍🍳 Пухта',ready:'✅ Тайёр',unavail:'❌ Тамом'}[i.status]||'';
+      if(i.status!=='ready'&&i.status!=='unavail')allReady=false;
+      items+='<div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:#0d1117;border-radius:7px;margin-bottom:5px;gap:7px;flex-wrap:wrap">'
+        +'<div style="flex:1;min-width:130px"><div style="font-size:12px;font-weight:800">'+i.name+' <span style="color:#f5c518">×'+i.qty+'</span></div>'
+        +'<div style="margin-top:3px"><span class="badge '+stCls+'">'+stLbl+'</span></div></div>'
+        +'<div style="display:flex;gap:4px;flex-wrap:wrap">'
+        +(i.status==='pending'?'<button onclick="kSt('+o.id+",'"+k+"'"+')" class="btn bb bxs">▶ Пухта</button>':'')
+        +(i.status==='cooking'?'<button onclick="kRd('+o.id+",'"+k+"'"+')" class="btn bgn bxs">✅ Тайёр</button>':'')
+        +(i.status!=='ready'&&i.status!=='unavail'?'<button onclick="kUn('+o.id+",'"+k+"'"+')" class="btn br bxs">❌ Тамом</button>':'')
+        +'</div></div>';
+    });
+    var btns='';
+    if(o.status==='new')btns+='<button onclick="kAll('+o.id+')" class="btn bg bsm" style="flex:1">👨‍🍳 Ҳама пухтан</button>';
+    if(allReady&&Object.keys(o.items).length>0)btns+='<button onclick="kFin('+o.id+')" class="btn bgn bsm" style="flex:1">✅ Заказ тайёр!</button>';
+    html+='<div class="kc '+o.status+'">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:7px;flex-wrap:wrap">'
+      +'<div><div style="font-size:14px;font-weight:900;color:#f5c518">🔥 №'+o.id+'</div>'
+      +'<div style="color:#8b949e;font-size:10px;margin-top:2px">'+tp+'</div>'
+      +'<div style="margin-top:4px">'+paidB+'</div></div>'
+      +'<div style="text-align:right"><div style="color:#8b949e;font-size:10px">'+o.time+'</div>'
+      +'<span class="badge '+sCls+'">'+sLbl+'</span></div></div>'
+      +items
+      +'<div style="display:flex;gap:6px;margin-top:9px;flex-wrap:wrap">'+btns+'</div>'
+      +'</div>';
+  });
+  el.innerHTML=html;
+}
+function kAll(id){var o=orders.find(function(x){return x.id===id;});if(!o)return;o.status='cooking';Object.values(o.items).forEach(function(i){if(i.status==='pending')i.status='cooking';});renderKitchen();toast('👨‍🍳 №'+id,'y');}
+function kSt(id,k){var o=orders.find(function(x){return x.id===id;});if(!o)return;o.items[k].status='cooking';if(o.status==='new')o.status='cooking';renderKitchen();toast('👨‍🍳 '+o.items[k].name,'y');}
+function kRd(id,k){var o=orders.find(function(x){return x.id===id;});if(!o)return;o.items[k].status='ready';renderKitchen();renderWaiter();toast('✅ '+o.items[k].name);}
+function kUn(id,k){var o=orders.find(function(x){return x.id===id;});if(!o)return;var nm=o.items[k].name;var did=o.items[k].did;o.items[k].status='unavail';if(did){var d=dishes.find(function(x){return x.id===did;});if(d)d.avail=false;}renderKitchen();renderCustomer(curCat);toast('❌ '+nm+' аз меню!','r');}
+function kFin(id){var o=orders.find(function(x){return x.id===id;});if(!o)return;o.status='ready';o.readyAt=now();renderKitchen();renderWaiter();renderCourier();toast('✅ №'+id+' тайёр! Афитсиант хабар гирифт!');}
+
+// ════════════════════════════════════
+// WAITER — handles dine_in/pickup orders. Sees orders regardless of payment.
+// ════════════════════════════════════
+var waiterCurTab='active';
+function wTab(tab,btn){
+  waiterCurTab=tab;
+  document.getElementById('wt-active').className='btn bgy bsm';
+  document.getElementById('wt-history').className='btn bgy bsm';
+  if(btn)btn.className='btn bg bsm';
+  else document.getElementById('wt-'+tab).className='btn bg bsm';
+  renderWaiter();
+}
+
+function renderWaiter(){
+  var myName=currentStaff?currentStaff.name:'Афитсиант';
+  // Active = not (delivered AND paid). Delivered-unpaid stays visible!
+  var newO=orders.filter(function(o){return o.otype!=='delivery'&&(o.status!=='delivered'||!o.paid);});
+  var readyO=orders.filter(function(o){return o.otype!=='delivery'&&o.status==='ready';});
+  // MY personal stats
+  var myAllOrders=orders.filter(function(o){return o.waiter===myName;});
+  var myDone=myAllOrders.filter(function(o){return o.status==='delivered'&&o.paid;});
+  var myEarn=myDone.reduce(function(s,o){return s+o.total;},0);
+  document.getElementById('w-rdy').textContent=readyO.length;
+  document.getElementById('w-act').textContent=newO.length;
+  document.getElementById('w-done').textContent=myDone.length;
+  // Update call notification badge
+  var waitingCnt=waiterCalls.filter(function(c){return c.status==='waiting';}).length;
+  var badge=document.getElementById('w-call-badge');
+  if(badge){
+    badge.style.display=waitingCnt>0?'block':'none';
+    badge.textContent='🔔 '+waitingCnt;
+  }
+  var eEl=document.getElementById('w-earn');
+  if(eEl)eEl.textContent=myEarn.toLocaleString()+' сом';
+  var mEl=document.getElementById('w-myord');
+  if(mEl)mEl.textContent=myAllOrders.length;
+  // If history tab - show my personal history
+  if(waiterCurTab==='history'){
+    var hEl=document.getElementById('waiter-list');
+    var cEl=document.getElementById('waiter-calls');
+    if(cEl)cEl.innerHTML='';
+    if(!myDone.length){hEl.innerHTML='<div style="text-align:center;padding:35px;color:#555">📜 История холӣ</div>';return;}
+    var sorted=myDone.sort(function(a,b){return b.id-a.id;});
+    var hhtml='<div style="background:#0c1a30;border:1px solid #3b82f6;border-radius:9px;padding:9px 11px;margin-bottom:9px;font-size:11px;color:#60a5fa;font-weight:700">📜 Таърихи ман — '+myDone.length+' заказ · '+myEarn.toLocaleString()+' сом</div>';
+    sorted.forEach(function(o){
+      var tp={dine_in:'🪑 Миз №'+o.table,pickup:'🏃 Pickup'}[o.otype]||'';
+      var itsHtml='';
+      Object.values(o.items).forEach(function(i){
+        itsHtml+='<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:11px"><span>'+i.name+' ×'+i.qty+'</span><span style="color:#f5c518">'+(i.price*i.qty).toLocaleString()+'</span></div>';
+      });
+      hhtml+='<div style="background:#161b22;border:1px solid #21262d;border-left:4px solid #22c55e;border-radius:10px;padding:12px;margin-bottom:8px;opacity:.85">'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:7px;flex-wrap:wrap">'
+        +'<div><div style="font-weight:900;font-size:13px">№'+o.id+' <span class="badge b-g">✅ Расонида</span></div>'
+        +'<div style="font-size:11px;color:#8b949e;margin-top:2px">'+tp+'</div>'
+        +'<div style="font-size:10px;color:#8b949e;margin-top:2px">'+o.time+(o.deliveredAt?' → '+o.deliveredAt:'')+'</div></div>'
+        +'<div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#f5c518">'+o.total.toLocaleString()+' сом</div></div></div>'
+        +'<div style="background:#0d1117;border-radius:7px;padding:7px 9px;margin-top:7px">'+itsHtml+'</div></div>';
+    });
+    hEl.innerHTML=hhtml;
+    return;
+  }
+  // Waiter calls
+  // Only show waiting calls (not taken by others, not done)
+  var waitingCalls=waiterCalls.filter(function(c){return c.status==='waiting';});
+  // My calls (calls I accepted)
+  var myName=currentStaff?currentStaff.name:'Афитсиант';
+  var myCalls=waiterCalls.filter(function(c){return c.status==='taken'&&c.assignedTo===myName;});
+  var ch='';
+  // Waiting calls - big alert style
+  if(waitingCalls.length){
+    ch+='<div style="background:linear-gradient(135deg,#3d2b00,#2a1d00);border:2px solid #f59e0b;border-radius:12px;padding:12px;margin-bottom:11px">'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">'
+      +'<span style="font-size:22px;animation:none">🔔</span>'
+      +'<div style="font-weight:900;color:#fbbf24;font-size:13px">Даъватҳо — '+waitingCalls.length+' та</div></div>';
+    waitingCalls.forEach(function(c){
+      ch+='<div style="background:#1a1200;border:1px solid #f59e0b;border-radius:10px;padding:11px;margin-bottom:7px">'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:7px;flex-wrap:wrap;margin-bottom:8px">'
+        +'<div>'
+        +'<div style="font-size:16px;font-weight:900;color:#f5c518">🪑 Миз №'+c.table+'</div>'
+        +'<div style="font-size:12px;font-weight:700;color:#fbbf24;margin-top:3px">'+c.reasonLabel+'</div>'
+        +'<div style="color:#8b949e;font-size:10px;margin-top:3px">⏰ '+c.time+'</div>'
+        +'</div>'
+        +'<button onclick="wTc('+c.id+')" style="background:#f5c518;color:#000;border:none;padding:11px 16px;border-radius:9px;font-size:13px;font-weight:900;cursor:pointer;font-family:inherit;white-space:nowrap">✋ Ман меравам</button>'
+        +'</div></div>';
+    });
+    ch+='</div>';
+  }
+  // My accepted calls
+  if(myCalls.length){
+    ch+='<div style="background:#0c1a30;border:1px solid #3b82f6;border-radius:11px;padding:11px;margin-bottom:11px">'
+      +'<div style="font-weight:900;color:#60a5fa;margin-bottom:8px;font-size:12px">📋 Даъватҳои ман</div>';
+    myCalls.forEach(function(c){
+      ch+='<div style="background:#161b22;border-radius:9px;padding:10px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;gap:7px;flex-wrap:wrap">'
+        +'<div><div style="font-weight:900;font-size:13px;color:#f5c518">🪑 Миз №'+c.table+'</div>'
+        +'<div style="font-size:11px;color:#8b949e;margin-top:2px">'+c.reasonLabel+' · '+c.time+'</div></div>'
+        +'<button onclick="wDc('+c.id+')" class="btn bgn bsm">✅ Анҷом шуд</button>'
+        +'</div>';
+    });
+    ch+='</div>';
+  }
+  document.getElementById('waiter-calls').innerHTML=ch;
+  // Orders - show all that are not (delivered AND paid)
+  // i.e. delivered-but-unpaid orders STAY visible until cashier confirms payment
+  var show=newO;
+  var el=document.getElementById('waiter-list');
+  if(!show.length){el.innerHTML='<div style="text-align:center;padding:35px;color:#555">✅ Заказ нест</div>';return;}
+  var stMap={new:'🆕 Нав',cooking:'👨‍🍳 Пухтилмоқда',ready:'✅ Тайёр!',delivering:'🏃 Роҳда',delivered:'✅ Расонида — пардохт интизор'};
+  var stCls={new:'b-bl',cooking:'b-p',ready:'b-g',delivering:'b-y',delivered:'b-y'};
+  var html='';
+  show.forEach(function(o){
+    var tp={dine_in:'🪑 Миз №<b style="color:#f5c518">'+o.table+'</b>',pickup:'🏃 Pickup'}[o.otype]||'';
+    var wB=o.waiter?'<span class="badge b-bl">👤 '+o.waiter+'</span>':'<span class="badge b-gr">❓ Бе афитсиант</span>';
+    var pB=o.paid?'<span class="badge b-g">✅ Пардохт</span>':'<span class="badge b-r">⏳ Пардохт нест</span>';
+    var items='';
+    Object.values(o.items).forEach(function(i){
+      var stCls2={pending:'b-y',cooking:'b-bl',ready:'b-g',unavail:'b-r'}[i.status]||'b-gr';
+      var stLbl2={pending:'⏳',cooking:'👨‍🍳',ready:'✅',unavail:'❌'}[i.status]||'';
+      items+='<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:11px"><span>'+i.name+' ×'+i.qty+'</span><span><span class="badge '+stCls2+'">'+stLbl2+'</span> '+(i.price*i.qty).toLocaleString()+'</span></div>';
+    });
+    var btns=[];
+    if(!o.waiter&&o.status!=='delivered'){
+      btns.push('<button onclick="wTake('+o.id+')" class="btn bg bsm">✋ Ман мегирам</button>');
+    }
+    // Show "Ба миз бурдам" button ONLY when order is READY (kitchen finished)
+    if(o.waiter&&o.status==='ready'){
+      btns.push('<button onclick="wFinish('+o.id+')" style="background:#22c55e;color:#000;border:none;padding:12px;border-radius:9px;font-size:13px;font-weight:900;cursor:pointer;font-family:inherit;width:100%">🏃 Ба миз бурдам — Расонидам!</button>');
+    }
+    // While cooking - show waiting message
+    if(o.waiter&&(o.status==='new'||o.status==='cooking')){
+      btns.push('<div style="background:#3d2b00;border:1px solid #f59e0b;border-radius:9px;padding:11px;width:100%;text-align:center;font-size:12px;color:#fbbf24;font-weight:700">⏳ Интизор: ошпаз тайёр карда истодааст...</div>');
+    }
+    html+='<div class="wc '+o.status+'">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;gap:7px;flex-wrap:wrap">'
+      +'<div><div style="font-weight:900;font-size:13px">№'+o.id+'</div>'
+      +'<div style="font-size:11px;color:#8b949e;margin-top:2px">'+tp+'</div>'
+      +'<div style="margin-top:4px">'+wB+' '+pB+'</div></div>'
+      +'<div style="text-align:right"><span class="badge '+(stCls[o.status]||'b-gr')+'">'+(stMap[o.status]||o.status)+'</span>'
+      +'<div style="color:#8b949e;font-size:10px;margin-top:3px">'+o.time+'</div></div></div>'
+      +'<div style="background:#0d1117;border-radius:7px;padding:7px 9px;margin:7px 0">'+items+'</div>'
+      +'<div style="font-size:13px;font-weight:900;color:#f5c518;margin-bottom:7px">'+o.total.toLocaleString()+' сом</div>'
+      +'<div style="display:flex;gap:5px;flex-wrap:wrap">'+btns.join('')+'</div></div>';
+  });
+  el.innerHTML=html;
+}
+function wTc(id){
+  var c=waiterCalls.find(function(x){return x.id===id;});
+  if(!c)return;
+  if(c.status!=='waiting'){toast('❌ Аллакай қабул шуд!','r');return;}
+  c.assignedTo=currentStaff?currentStaff.name:'Афитсиант';
+  c.assignedAt=now();
+  c.status='taken';
+  renderWaiter();
+  toast('✅ Миз №'+c.table+' — меравам!','g');
+}
+function wDc(id){var c=waiterCalls.find(function(x){return x.id===id;});if(!c)return;c.status='done';renderWaiter();toast('✅ Анҷом шуд!','g');}
+function wTake(id){var o=orders.find(function(x){return x.id===id;});if(!o)return;if(o.waiter){toast('❌ Аллакай '+o.waiter,'r');return;}o.waiter=currentStaff?currentStaff.name:'Афитсиант';renderWaiter();toast('✅ Гирифта шуд!');}
+function wDel(id){
+  var o=orders.find(function(x){return x.id===id;});if(!o)return;
+  if(o.status==='ready'){o.status='delivering';renderWaiter();renderCashier();toast('🏃 Роҳда');return;}
+  if(o.status==='delivering'){o.status='delivered';o.deliveredAt=now();renderWaiter();renderCashier();if(currentRole==='admin')rAdmAll();toast('✅ Расонида шуд!');}
+}
+function wFinish(id){
+  var o=orders.find(function(x){return x.id===id;});if(!o)return;
+  o.status='delivered';
+  o.deliveredAt=now();
+  o.deliveredBy=currentStaff?currentStaff.name:'Афитсиант';
+  renderWaiter();renderCashier();renderKitchen();
+  if(currentRole==='admin')rAdmAll();
+  toast('✅ №'+id+' ба миз расонида шуд!','g');
+}
+
+// ════════════════════════════════════
+// CASHIER — One CONFIRM button per order. Sees ALL unpaid orders regardless of status.
+// ════════════════════════════════════
+var cashierCurTab='active';
+function caTab(tab,btn){
+  cashierCurTab=tab;
+  document.getElementById('cat-active').className='btn bgy bsm';
+  document.getElementById('cat-history').className='btn bgy bsm';
+  if(btn)btn.className='btn bg bsm';
+  else document.getElementById('cat-'+tab).className='btn bg bsm';
+  renderCashier();
+}
+
+function renderCashier(){
+  var myName=currentStaff?currentStaff.name:'Хазиначи';
+  var unpaid=orders.filter(function(o){return !o.paid;}).sort(function(a,b){return b.id-a.id;});
+  var paid=orders.filter(function(o){return o.paid;});
+  var myPaid=paid.filter(function(o){return o.paidBy===myName;});
+  var myEarn=myPaid.reduce(function(s,o){return s+o.total;},0);
+  document.getElementById('c-unp').textContent=unpaid.length;
+  document.getElementById('c-p').textContent=myPaid.length;
+  document.getElementById('c-tot').textContent=myEarn.toLocaleString();
+  var el=document.getElementById('cashier-list');
+  // History tab
+  if(cashierCurTab==='history'){
+    if(!myPaid.length){el.innerHTML='<div style="text-align:center;padding:35px;color:#555">📜 История холӣ</div>';return;}
+    var sorted=myPaid.sort(function(a,b){return b.id-a.id;});
+    var hh='<div style="background:#052e16;border:1px solid #22c55e;border-radius:9px;padding:9px 11px;margin-bottom:9px;font-size:11px;color:#4ade80;font-weight:700">📜 Таърихи ман — '+myPaid.length+' пардохт · '+myEarn.toLocaleString()+' сом</div>';
+    var ml={cash:'💵 Накдӣ',card:'💳 Карта',qr:'📱 QR'};
+    sorted.forEach(function(o){
+      var tp={dine_in:'🪑 Миз №'+o.table,delivery:'🚗 '+o.addr,pickup:'🏃 Pickup'}[o.otype]||'';
+      hh+='<div style="background:#161b22;border:1px solid #21262d;border-left:4px solid #22c55e;border-radius:10px;padding:12px;margin-bottom:8px;opacity:.85">'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:7px;flex-wrap:wrap">'
+        +'<div><div style="font-weight:900;font-size:13px">№'+o.id+' <span class="badge b-g">✅ Пардохт</span></div>'
+        +'<div style="font-size:11px;color:#8b949e;margin-top:2px">'+tp+'</div>'
+        +'<div style="font-size:10px;color:#8b949e;margin-top:2px">'+(o.paidAt||o.time)+' · '+(ml[o.method]||'')+'</div></div>'
+        +'<div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#f5c518">'+o.total.toLocaleString()+' сом</div></div></div></div>';
+    });
+    el.innerHTML=hh;return;
+  }
+  // Only show unpaid - paid go to history
+  var all=unpaid;
+  if(!all.length){el.innerHTML='<div style="text-align:center;padding:35px;color:#555">Пардохт нест</div>';return;}
+  var html='';
+  all.forEach(function(o){
+    var tp={dine_in:'🪑 Миз №'+o.table,delivery:'🚗 '+o.addr,pickup:'🏃 Pickup'}[o.otype]||'';
+    var ml={cash:'💵 Накдӣ',card:'💳 Карта',qr:'📱 QR'};
+    var mi={cash:'💵',card:'💳',qr:'📱'};
+    var items='';
+    Object.values(o.items).forEach(function(i){items+='<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:11px"><span>'+i.name+' ×'+i.qty+'</span><span style="color:#f5c518">'+(i.price*i.qty).toLocaleString()+'</span></div>';});
+    var statusBox='';
+    if(o.paid){
+      statusBox='<div style="background:#052e16;border:1px solid #22c55e;border-radius:9px;padding:11px;display:flex;align-items:center;justify-content:space-between;gap:8px">'
+        +'<div><div style="font-size:13px;font-weight:900;color:#22c55e">✅ Пардохт қабул шуд!</div>'
+        +'<div style="font-size:10px;color:#8b949e;margin-top:2px">'+(o.paidAt||o.time)+' · '+(ml[o.method]||'')+'</div></div>'
+        +'<span style="font-size:24px">'+(mi[o.method]||'✅')+'</span></div>';
+    } else {
+      // Big confirm button - one tap to confirm payment
+      var hint=o.paymentClaimed
+        ? 'Мизоҷ гуфт ки '+(ml[o.method]||'')+' пардохт кардааст. Тасдиқ кунед:'
+        : 'Мизоҷ '+(ml[o.method]||'')+' интихоб кардааст. Ҳангоми гирифтан тугмаро пахш кунед:';
+      statusBox='<div style="background:#3d2b00;border:1px solid #f59e0b;border-radius:9px;padding:11px;margin-bottom:9px">'
+        +'<div style="font-size:11px;color:#fbbf24;font-weight:700">'+hint+'</div></div>'
+        +'<button onclick="payConfirm('+o.id+')" style="width:100%;background:#22c55e;color:#000;border:none;padding:15px;border-radius:10px;font-size:14px;font-weight:900;cursor:pointer;font-family:inherit">'
+        +'✅ Пардохтро қабул кардам ('+(mi[o.method]||'💰')+' '+o.total.toLocaleString()+' сом)</button>';
+    }
+    html+='<div style="background:#161b22;border:1px solid #21262d;border-radius:11px;padding:13px;margin-bottom:9px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:9px;gap:8px">'
+      +'<div><div style="font-weight:900;font-size:13px">№'+o.id+'</div>'
+      +'<div style="color:#8b949e;font-size:11px;margin-top:2px">'+tp+'</div>'
+      +'<div style="color:#8b949e;font-size:10px;margin-top:2px">'+o.time+' · Усул: <b style="color:#f5c518">'+(ml[o.method]||'')+'</b></div></div>'
+      +'<div style="text-align:right"><div style="font-size:15px;font-weight:900;color:#f5c518">'+o.total.toLocaleString()+' сом</div></div></div>'
+      +'<div style="background:#0d1117;border-radius:7px;padding:8px;margin-bottom:9px">'+items+'</div>'
+      +statusBox+'</div>';
+  });
+  el.innerHTML=html;
+}
+function payConfirm(id){
+  var o=orders.find(function(x){return x.id===id;});if(!o)return;
+  o.paid=true;
+  o.paidAt=now();
+  o.paidBy=currentStaff?currentStaff.name:'Хазиначи';
+  renderCashier();renderWaiter();renderKitchen();renderCourier();
+  if(currentRole==='admin')rAdmAll();
+  toast('✅ №'+id+' — пардохт қабул шуд!','g');
+  toast('🛎 Афитсиант: №'+id+' пардохт шуд!','b');
+}
+
+// ════════════════════════════════════
+// COURIER — handles delivery orders
+// ════════════════════════════════════
+var courierCurTab='active';
+function crTab(tab,btn){
+  courierCurTab=tab;
+  document.getElementById('crt-active').className='btn bgy bsm';
+  document.getElementById('crt-history').className='btn bgy bsm';
+  if(btn)btn.className='btn bg bsm';
+  else document.getElementById('crt-'+tab).className='btn bg bsm';
+  renderCourier();
+}
+
+function renderCourier(){
+  var myName=currentStaff?currentStaff.name:'Курьер';
+  var pending=orders.filter(function(o){return o.otype==='delivery'&&['new','cooking','ready'].includes(o.status)&&!o.courier;});
+  var mine=orders.filter(function(o){return o.otype==='delivery'&&o.courier===myName;});
+  // Active = not (delivered AND paid)
+  var mineAct=mine.filter(function(o){return o.status!=='delivered'||!o.paid;});
+  var mineDone=mine.filter(function(o){return o.status==='delivered'&&o.paid;});
+  var myEarn=mineDone.reduce(function(s,o){return s+o.total;},0);
+  document.getElementById('cr-n').textContent=pending.length;
+  document.getElementById('cr-r').textContent=mineAct.length;
+  document.getElementById('cr-d').textContent=mineDone.length;
+  var eEl=document.getElementById('cr-earn');
+  if(eEl)eEl.textContent=myEarn.toLocaleString()+' сом';
+  var mEl=document.getElementById('cr-myord');
+  if(mEl)mEl.textContent=mine.length;
+  // History tab
+  if(courierCurTab==='history'){
+    var hEl=document.getElementById('courier-list');
+    if(!mineDone.length){hEl.innerHTML='<div style="text-align:center;padding:35px;color:#555">📜 История холӣ</div>';return;}
+    var sorted=mineDone.sort(function(a,b){return b.id-a.id;});
+    var hh='<div style="background:#052e16;border:1px solid #22c55e;border-radius:9px;padding:9px 11px;margin-bottom:9px;font-size:11px;color:#4ade80;font-weight:700">📜 Таърихи ман — '+mineDone.length+' доставка · '+myEarn.toLocaleString()+' сом</div>';
+    sorted.forEach(function(o){
+      var itsHtml='';
+      Object.values(o.items).forEach(function(i){
+        itsHtml+='<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:11px"><span>'+i.name+' ×'+i.qty+'</span><span style="color:#f5c518">'+(i.price*i.qty).toLocaleString()+'</span></div>';
+      });
+      hh+='<div style="background:#161b22;border:1px solid #21262d;border-left:4px solid #22c55e;border-radius:10px;padding:12px;margin-bottom:8px;opacity:.85">'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:7px;flex-wrap:wrap">'
+        +'<div><div style="font-weight:900;font-size:13px">№'+o.id+' <span class="badge b-g">✅ Расонида</span></div>'
+        +'<div style="font-size:12px;color:#3b82f6;margin-top:3px">🚗 '+(o.addr||'-')+'</div>'
+        +'<div style="font-size:10px;color:#8b949e;margin-top:2px">'+o.time+(o.deliveredAt?' → '+o.deliveredAt:'')+'</div></div>'
+        +'<div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#f5c518">'+o.total.toLocaleString()+' сом</div></div></div>'
+        +'<div style="background:#0d1117;border-radius:7px;padding:7px 9px;margin-top:7px">'+itsHtml+'</div></div>';
+    });
+    hEl.innerHTML=hh;
+    return;
+  }
+  var all=mineAct.concat(pending).concat(mineDone.slice(0,3));
+  var el=document.getElementById('courier-list');
+  if(!all.length){el.innerHTML='<div style="text-align:center;padding:35px;color:#555">🚗 Доставка нест</div>';return;}
+  var html='';
+  all.forEach(function(o){
+    var isMine=o.courier===myName;
+    var bC=o.status==='delivered'?'#22c55e':isMine?'#f59e0b':'#3b82f6';
+    var pB=o.paid?'<span class="badge b-g">✅ Пардохт</span>':'<span class="badge b-r">⏳ Пардохт нест</span>';
+    var sB={new:'<span class="badge b-bl">🆕 Нав</span>',cooking:'<span class="badge b-y">👨‍🍳 Пухта</span>',ready:'<span class="badge b-g">✅ Тайёр</span>',delivering:'<span class="badge b-y">🚗 Роҳда</span>',delivered:o.paid?'<span class="badge b-g">✅ Расонида</span>':'<span class="badge b-y">✅ Расонида — пардохт интизор</span>'}[o.status]||'';
+    var items='';
+    Object.values(o.items).forEach(function(i){items+='<div style="display:flex;justify-content:space-between;padding:3px 0;font-size:11px"><span>'+i.name+' ×'+i.qty+'</span><span style="color:#f5c518">'+(i.price*i.qty).toLocaleString()+'</span></div>';});
+    var btns=[];
+    if(!isMine&&o.status!=='delivered'){
+      btns.push('<button onclick="crT('+o.id+')" class="btn bg bsm">✋ Ман мегирам</button>');
+    }
+    // Show "Гирифтам - Расонидам" button ONLY when order is READY
+    if(isMine&&o.status==='ready'){
+      btns.push('<button onclick="crFinish('+o.id+')" style="background:#22c55e;color:#000;border:none;padding:12px;border-radius:9px;font-size:13px;font-weight:900;cursor:pointer;font-family:inherit;width:100%">📦 Гирифтам — Расонидам!</button>');
+    }
+    // While cooking - show waiting message
+    if(isMine&&(o.status==='new'||o.status==='cooking')){
+      btns.push('<div style="background:#3d2b00;border:1px solid #f59e0b;border-radius:9px;padding:11px;width:100%;text-align:center;font-size:12px;color:#fbbf24;font-weight:700">⏳ Интизор: ошпаз тайёр карда истодааст...</div>');
+    }
+    html+='<div style="background:#161b22;border:1px solid #21262d;border-left:4px solid '+bC+';border-radius:11px;padding:13px;margin-bottom:9px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:8px">'
+      +'<div><div style="font-weight:900;font-size:13px">№'+o.id+(isMine?' <span class="badge b-y">Ман</span>':'')+'</div>'
+      +'<div style="font-size:12px;color:#3b82f6;margin-top:3px">🚗 '+(o.addr||'-')+'</div>'
+      +'<div style="color:#8b949e;font-size:10px;margin-top:2px">'+o.time+'</div>'
+      +'<div style="margin-top:4px">'+sB+' '+pB+'</div></div>'
+      +'<div style="text-align:right"><div style="font-size:14px;font-weight:900;color:#f5c518">'+o.total.toLocaleString()+' сом</div></div></div>'
+      +'<div style="background:#0d1117;border-radius:7px;padding:7px;margin-bottom:9px">'+items+'</div>'
+      +'<div style="display:flex;gap:6px;flex-wrap:wrap">'+btns.join('')+'</div></div>';
+  });
+  el.innerHTML=html;
+}
+function crT(id){var o=orders.find(function(x){return x.id===id;});if(!o||o.courier)return;o.courier=currentStaff?currentStaff.name:'Курьер';renderCourier();toast('✅ Гирифта шуд!');}
+function crP(id){var o=orders.find(function(x){return x.id===id;});if(!o)return;o.status='delivering';renderCourier();if(currentRole==='admin')rAdmAll();toast('🚗 Роҳда','y');}
+function crD(id){var o=orders.find(function(x){return x.id===id;});if(!o)return;o.status='delivered';o.deliveredAt=now();renderCourier();renderCashier();if(currentRole==='admin')rAdmAll();toast('✅ Расонида шуд!');}
+function crFinish(id){
+  var o=orders.find(function(x){return x.id===id;});if(!o)return;
+  o.status='delivered';
+  o.deliveredAt=now();
+  o.deliveredBy=currentStaff?currentStaff.name:'Курьер';
+  renderCourier();renderCashier();renderKitchen();
+  if(currentRole==='admin')rAdmAll();
+  toast('✅ №'+id+' расонида шуд!','g');
+}
+
+// ════════════════════════════════════
+// ADMIN
+// ════════════════════════════════════
+var ATITLES={dash:'📊 Dashboard',orders:'📦 Заказҳо',history:'📜 История',menu:'🍽 Таомҳо',cats:'📂 Категория',tables:'🪑 Мизҳо',staff:'👥 Кормандон',promos:'🎁 Промокод',cards:'🏦 Картаҳо'};
+function AP(name,el){
+  document.querySelectorAll('.apg').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.asd-it').forEach(function(i){i.classList.remove('on');});
+  document.getElementById('ap-'+name).classList.add('on');
+  if(el)el.classList.add('on');
+  document.getElementById('adm-t').textContent=ATITLES[name]||name;
+  var rs={dash:rAdmDash,orders:rAdmOrders,history:rAdmHistory,menu:rAdmMenu,cats:rAdmCats,tables:rAdmTbls,staff:rAdmStaff,promos:rAdmPromos,cards:rAdmCards};
+  if(rs[name])rs[name]();
+}
+function rAdmAll(){rAdmDash();rAdmOrders();rAdmHistory();rAdmMenu();rAdmCats();rAdmTbls();rAdmStaff();rAdmPromos();rAdmCards();}
+
+function rAdmHistory(){
+  // History = delivered AND paid orders
+  var hist=orders.filter(function(o){return o.status==='delivered'&&o.paid;}).sort(function(a,b){return b.id-a.id;});
+  document.getElementById('h-cnt').textContent=hist.length;
+  document.getElementById('h-total').textContent=hist.reduce(function(s,o){return s+o.total;},0).toLocaleString()+' сом';
+  var ml={cash:'💵',card:'💳',qr:'📱'};
+  var html='';
+  hist.forEach(function(o){
+    var its=Object.values(o.items).map(function(i){return i.name+'×'+i.qty;}).join(', ');
+    var deliveredBy=o.deliveredBy||o.courier||o.waiter||'-';
+    html+='<tr><td><b>#'+o.id+'</b></td>'
+      +'<td style="color:#8b949e;font-size:10px">'+(o.deliveredAt||o.time)+'</td>'
+      +'<td>'+(o.otype==='dine_in'?'🪑'+o.table:o.otype==='delivery'?'🚗':'🏃')+'</td>'
+      +'<td style="color:#8b949e;font-size:10px">'+its.substring(0,28)+'</td>'
+      +'<td style="color:#f5c518;font-weight:800">'+o.total.toLocaleString()+'</td>'
+      +'<td>'+(ml[o.method]||'')+'</td>'
+      +'<td style="font-size:10px">'+deliveredBy+'</td></tr>';
+  });
+  document.getElementById('h-tbl').innerHTML=html||'<tr><td colspan="7" style="text-align:center;color:#555;padding:18px">История холӣ</td></tr>';
+}
+
+function rAdmDash(){
+  var tot=orders.reduce(function(s,o){return s+o.total;},0);
+  var paid=orders.filter(function(o){return o.paid;});
+  var unp=orders.filter(function(o){return !o.paid;});
+  document.getElementById('d-ord').textContent=orders.length;
+  document.getElementById('d-rev').textContent=tot.toLocaleString();
+  document.getElementById('d-paid').textContent=paid.length;
+  document.getElementById('d-wait').textContent=unp.length;
+  var ml={cash:'💵',card:'💳',qr:'📱'};
+  var sm={new:'🆕 Нав',cooking:'👨‍🍳',ready:'✅ Тайёр',delivering:'🏃',delivered:'🚚 Расонида'};
+  var html='';
+  // Show only active orders (not fully done) in dashboard
+  var dashActive=orders.filter(function(o){return o.status!=='delivered'||!o.paid;}).slice(0,6);
+  dashActive.forEach(function(o){
+    html+='<tr><td><b>#'+o.id+'</b></td>'
+      +'<td>'+(o.otype==='dine_in'?'🪑'+o.table:o.otype==='delivery'?'🚗':'🏃')+'</td>'
+      +'<td style="color:#f5c518;font-weight:800">'+o.total.toLocaleString()+'</td>'
+      +'<td>'+(ml[o.method]||'')+'</td>'
+      +'<td><span class="badge '+(o.paid?'b-g':'b-r')+'">'+(o.paid?'✅':'⏳')+'</span></td>'
+      +'<td>'+(sm[o.status]||o.status)+'</td></tr>';
+  });
+  document.getElementById('d-tbl').innerHTML=html||'<tr><td colspan="6" style="text-align:center;color:#555;padding:18px">Заказ нест</td></tr>';
+}
+
+function rAdmOrders(){
+  var ml={cash:'💵 Накдӣ',card:'💳 Карта',qr:'📱 QR'};
+  var sm={new:'🆕 Нав',cooking:'👨‍🍳 Пухта',ready:'✅ Тайёр',delivering:'🏃 Роҳда',delivered:'🚚 Расонида'};
+  var html='';
+  // Active = not delivered OR not paid
+  var active=orders.filter(function(o){return o.status!=='delivered'||!o.paid;});
+  var srch=document.getElementById('ord-search');
+  var q=srch?srch.value.toLowerCase():'';
+  if(q){active=active.filter(function(o){
+    var its=Object.values(o.items).map(function(i){return i.name;}).join(' ').toLowerCase();
+    return String(o.id).includes(q)||its.includes(q)||(o.addr||'').toLowerCase().includes(q)||String(o.table).includes(q);
+  });}
+  active.forEach(function(o){
+    var its=Object.values(o.items).map(function(i){return i.name+'×'+i.qty;}).join(', ');
+    html+='<tr><td><b>#'+o.id+'</b></td>'
+      +'<td>'+(o.otype==='dine_in'?'🪑'+o.table:o.otype==='delivery'?'🚗':'🏃')+'</td>'
+      +'<td style="color:#8b949e;font-size:10px">'+its.substring(0,28)+'</td>'
+      +'<td style="color:#f5c518;font-weight:800">'+o.total.toLocaleString()+'</td>'
+      +'<td>'+(ml[o.method]||'')+'</td>'
+      +'<td><span class="badge '+(o.paid?'b-g':'b-r')+'">'+(o.paid?'✅':'⏳')+'</span></td>'
+      +'<td>'+(sm[o.status]||o.status)+'</td></tr>';
+  });
+  document.getElementById('o-tbl').innerHTML=html||'<tr><td colspan="7" style="text-align:center;color:#555;padding:18px">Заказ нест</td></tr>';
+}
+
+function rAdmMenu(){
+  document.getElementById('m-cnt').textContent=dishes.length;
+  var html='';
+  dishes.forEach(function(d){
+    var catEm=(cats.find(function(c){return c.id===d.cat;})||{}).em||'';
+    var ic=d.photo?'<img src="'+d.photo+'" style="width:100%;height:100%;object-fit:cover">':'<span style="font-size:28px">'+(d.img||'🍽')+'</span>';
+    html+='<div style="display:flex;align-items:center;gap:10px;padding:11px 12px;border-bottom:1px solid #0d1117">'
+      +'<div style="width:60px;height:60px;background:#0d1117;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden">'+ic+'</div>'
+      +'<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:800">'+d.name+(!d.avail?' <span class="badge b-r" style="font-size:9px">❌</span>':'')+'</div>'
+      +'<div style="color:#8b949e;font-size:10px;margin-top:2px">'+catEm+' · ⏱'+d.time+'дақ</div>'
+      +'<div style="font-size:13px;font-weight:900;color:#f5c518;margin-top:2px">'+d.price.toLocaleString()+' сом</div></div>'
+      +'<div style="display:flex;gap:4px;align-items:center;flex-shrink:0">'
+      +'<label class="tog"><input type="checkbox"'+(d.avail?' checked':'')+' onchange="togD('+d.id+',this.checked)"><span class="tsl"></span></label>'
+      +'<button onclick="editDish('+d.id+')" class="btn bgy bxs">✏️</button>'
+      +'<button onclick="delDish('+d.id+')" class="btn br bxs">🗑</button></div></div>';
+  });
+  document.getElementById('m-list').innerHTML=html||'<div style="text-align:center;padding:20px;color:#555">Таом нест</div>';
+}
+function openAddDish(){
+  document.getElementById('d-id').value='0';
+  var sel=document.getElementById('d-cat');
+  sel.innerHTML='';
+  cats.forEach(function(c){sel.innerHTML+='<option value="'+c.id+'">'+c.em+' '+c.name+'</option>';});
+  document.getElementById('d-name').value='';
+  document.getElementById('d-nmru').value='';
+  document.getElementById('d-nmen').value='';
+  document.getElementById('d-price').value='';
+  document.getElementById('d-time').value='25';
+  document.getElementById('d-img').value='';
+  document.getElementById('d-avail').value='1';
+  document.getElementById('d-photo').value='';
+  document.getElementById('d-prev').innerHTML='';
+  var fn=document.getElementById('d-fname');
+  if(fn)fn.textContent='Интихоб нашудааст';
+  tempPhoto=null;
+  OM('m-adddish');
+}
+function editDish(id){
+  var d=dishes.find(function(x){return x.id===id;});if(!d)return;
+  var sel=document.getElementById('d-cat');
+  sel.innerHTML='';
+  cats.forEach(function(c){sel.innerHTML+='<option value="'+c.id+'">'+c.em+' '+c.name+'</option>';});
+  sel.value=d.cat;
+  document.getElementById('d-id').value=d.id;
+  document.getElementById('d-name').value=d.name;
+  document.getElementById('d-nmru').value=d.name_ru||'';
+  document.getElementById('d-nmen').value=d.name_en||'';
+  document.getElementById('d-price').value=d.price;
+  document.getElementById('d-time').value=d.time;
+  document.getElementById('d-img').value=d.img||'';
+  document.getElementById('d-avail').value=d.avail?'1':'0';
+  document.getElementById('d-photo').value='';
+  document.getElementById('d-prev').innerHTML=d.photo?'<img src="'+d.photo+'" style="width:80px;height:80px;object-fit:cover;border-radius:9px;border:2px solid #f5c518">':'';
+  var fn=document.getElementById('d-fname');
+  if(fn)fn.textContent=d.photo?'Сурати ҳозира':'Интихоб нашудааст';
+  tempPhoto=null;
+  OM('m-adddish');
+}
+function prvPhoto(){prvPhotoFrom('d-photo');}
+function prvPhotoFrom(inputId){
+  var input=document.getElementById(inputId);
+  if(!input)return;
+  var f=input.files[0];
+  if(!f)return;
+  var fnEl=document.getElementById('d-fname');
+  if(fnEl)fnEl.textContent='✅ '+f.name;
+  var r=new FileReader();
+  r.onload=function(ev){
+    tempPhoto=ev.target.result;
+    document.getElementById('d-prev').innerHTML=
+      '<img src="'+tempPhoto+'" style="width:100px;height:100px;object-fit:cover;border-radius:9px;border:2px solid #f5c518">';
+  };
+  r.readAsDataURL(f);
+}
+function saveDish(){
+  var id=parseInt(document.getElementById('d-id').value);
+  var name=document.getElementById('d-name').value.trim();
+  var price=parseInt(document.getElementById('d-price').value);
+  if(!name||!price){toast('❌ Ном ва нарх!','r');return;}
+  var data={
+    cat:parseInt(document.getElementById('d-cat').value),
+    name:name,
+    name_ru:document.getElementById('d-nmru').value.trim(),
+    name_en:document.getElementById('d-nmen').value.trim(),
+    price:price,
+    time:parseInt(document.getElementById('d-time').value)||25,
+    img:document.getElementById('d-img').value||'🍽',
+    avail:document.getElementById('d-avail').value==='1'
+  };
+  if(id===0){
+    data.id=nid();data.photo=tempPhoto;
+    dishes.push(data);
+    toast('✅ '+name+' илова шуд!');
+  } else {
+    var d=dishes.find(function(x){return x.id===id;});
+    Object.assign(d,data);
+    if(tempPhoto)d.photo=tempPhoto;
+    toast('💾 Сохта шуд!');
+  }
+  tempPhoto=null;
+  CM('m-adddish');rAdmMenu();renderCustomer(curCat);
+}
+function togD(id,v){var d=dishes.find(function(x){return x.id===id;});if(d){d.avail=v;rAdmMenu();renderCustomer(curCat);}}
+function delDish(id){if(!confirm('Ҳазф?'))return;dishes=dishes.filter(function(x){return x.id!==id;});rAdmMenu();renderCustomer(curCat);}
+
+function rAdmCats(){
+  // Restaurant settings preview
+  var rp=document.getElementById('rest-preview');
+  if(rp){
+    rp.innerHTML='<div style="background:#0d1117;border:1px solid #21262d;border-radius:9px;padding:12px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;flex-wrap:wrap;gap:5px">'
+      +'<div style="font-size:14px;font-weight:900;color:#f5c518">'+restSettings.name+'</div>'
+      +'<div style="font-size:10px;color:#8b949e">'+restSettings.hours+'</div></div>'
+      +'<div style="font-size:11px;color:#8b949e;margin-bottom:8px">'+restSettings.tagline+'</div>'
+      +'<div style="display:flex;gap:9px;flex-wrap:wrap;font-size:10px;color:#8b949e">'
+      +(restSettings.phone?'<span>📞 '+restSettings.phone+'</span>':'')
+      +(restSettings.address?'<span>📍 '+restSettings.address+'</span>':'')
+      +'</div></div>';
+  }
+  // Banner preview
+  var bp=document.getElementById('banner-preview');
+  if(bp){
+    if(bannerImg){
+      bp.innerHTML='<img src="'+bannerImg+'" style="width:100%;max-height:140px;object-fit:cover;border-radius:9px">';
+    } else {
+      bp.innerHTML='<div style="background:#0d1117;border:2px dashed #30363d;border-radius:9px;padding:25px;text-align:center;color:#555;font-size:12px">🖼 Банер нест. "📷 Иваз кардан" пахш кунед</div>';
+    }
+  }
+  // Cats list
+  var html='';
+  cats.forEach(function(c){
+    var img=c.photo?'<img src="'+c.photo+'" style="width:50px;height:50px;object-fit:cover;border-radius:9px">':'<div style="font-size:30px">'+c.em+'</div>';
+    var cnt=dishes.filter(function(d){return d.cat===c.id;}).length;
+    html+='<div style="display:flex;align-items:center;gap:11px;padding:10px 12px;border-bottom:1px solid #0d1117">'
+      +'<div style="width:50px;height:50px;background:#0d1117;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden">'+img+'</div>'
+      +'<div style="flex:1;min-width:0">'
+      +'<div style="font-size:13px;font-weight:800">'+c.name+'</div>'
+      +'<div style="font-size:10px;color:#8b949e">'+cnt+' таом · '+(c.name_ru||'-')+' / '+(c.name_en||'-')+'</div></div>'
+      +'<div style="display:flex;gap:4px">'
+      +'<button onclick="editCat('+c.id+')" class="btn bgy bxs">✏️</button>'
+      +'<button onclick="delCat('+c.id+')" class="btn br bxs">🗑</button>'
+      +'</div></div>';
+  });
+  document.getElementById('c-list').innerHTML=html||'<div style="text-align:center;padding:20px;color:#555">Категория нест</div>';
+}
+
+function openAddCat(){
+  document.getElementById('c-em').value='';
+  document.getElementById('c-nm').value='';
+  document.getElementById('c-nmru').value='';
+  document.getElementById('c-nmen').value='';
+  document.getElementById('c-photo').value='';
+  document.getElementById('c-prev').innerHTML='';
+  document.getElementById('c-fname').textContent='Интихоб нашудааст';
+  tempCatPhoto=null;
+  // Reset to add mode
+  window._editCatId=null;
+  OM('m-addcat');
+}
+
+function editCat(id){
+  var c=cats.find(function(x){return x.id===id;});if(!c)return;
+  document.getElementById('c-em').value=c.em||'';
+  document.getElementById('c-nm').value=c.name||'';
+  document.getElementById('c-nmru').value=c.name_ru||'';
+  document.getElementById('c-nmen').value=c.name_en||'';
+  document.getElementById('c-photo').value='';
+  document.getElementById('c-prev').innerHTML=c.photo?'<img src="'+c.photo+'" style="width:80px;height:80px;object-fit:cover;border-radius:9px;border:2px solid #f5c518">':'';
+  document.getElementById('c-fname').textContent=c.photo?'Сурати ҳозира':'Интихоб нашудааст';
+  tempCatPhoto=null;
+  window._editCatId=id;
+  OM('m-addcat');
+}
+
+function prvCatPhoto(){prvCatPhotoFrom('c-photo');}
+function prvCatPhotoFrom(inputId){
+  var input=document.getElementById(inputId);
+  if(!input)return;
+  var f=input.files[0];
+  if(!f)return;
+  var fn=document.getElementById('c-fname');
+  if(fn)fn.textContent='✅ '+f.name;
+  var r=new FileReader();
+  r.onload=function(ev){
+    tempCatPhoto=ev.target.result;
+    document.getElementById('c-prev').innerHTML='<img src="'+tempCatPhoto+'" style="width:100px;height:100px;object-fit:cover;border-radius:9px;border:2px solid #f5c518">';
+  };
+  r.readAsDataURL(f);
+}
+
+function openBanner(){
+  document.getElementById('b-photo').value='';
+  document.getElementById('b-prev').innerHTML=bannerImg?'<img src="'+bannerImg+'" style="width:100%;max-height:160px;object-fit:cover;border-radius:9px;border:2px solid #f5c518">':'';
+  document.getElementById('b-fname').textContent=bannerImg?'✅ Сурати ҳозира':'Интихоб нашудааст';
+  tempBnrPhoto=null;
+  // Highlight current height button
+  document.querySelectorAll('.bh-btn').forEach(function(b){
+    b.className=parseInt(b.getAttribute('data-h'))===bannerHeight?'bh-btn btn bg bsm':'bh-btn btn bgy bsm';
+  });
+  var cur=document.getElementById('bh-cur');
+  if(cur)cur.textContent=bannerHeight+'px';
+  OM('m-banner');
+}
+
+function prvBnrPhoto(){prvBnrPhotoFrom('b-photo');}
+function prvBnrPhotoFrom(inputId){
+  var input=document.getElementById(inputId);
+  if(!input)return;
+  var f=input.files[0];
+  if(!f)return;
+  document.getElementById('b-fname').textContent='✅ '+f.name;
+  var r=new FileReader();
+  r.onload=function(ev){
+    tempBnrPhoto=ev.target.result;
+    document.getElementById('b-prev').innerHTML='<img src="'+tempBnrPhoto+'" style="width:100%;max-height:160px;object-fit:cover;border-radius:9px;border:2px solid #f5c518">';
+  };
+  r.readAsDataURL(f);
+}
+
+function saveBanner(){
+  if(tempBnrPhoto)bannerImg=tempBnrPhoto;
+  CM('m-banner');rAdmCats();renderCustomer(curCat);toast('💾 Банер сохта шуд!');
+}
+
+function rmBanner(){
+  if(!confirm('Банерро ҳазф мекунед?'))return;
+  bannerImg=null;tempBnrPhoto=null;
+  CM('m-banner');rAdmCats();renderCustomer(curCat);toast('🗑 Банер ҳазф','r');
+}
+
+function setBnrH(h,btn){
+  bannerHeight=h;
+  document.querySelectorAll('.bh-btn').forEach(function(b){
+    b.className='bh-btn btn bgy bsm';
+  });
+  if(btn)btn.className='bh-btn btn bg bsm';
+  var cur=document.getElementById('bh-cur');
+  if(cur)cur.textContent=h+'px';
+}
+
+function openRestSet(){
+  document.getElementById('rs-nm').value=restSettings.name;
+  document.getElementById('rs-nmru').value=restSettings.name_ru;
+  document.getElementById('rs-nmen').value=restSettings.name_en;
+  document.getElementById('rs-tg').value=restSettings.tagline;
+  document.getElementById('rs-tgru').value=restSettings.tagline_ru;
+  document.getElementById('rs-tgen').value=restSettings.tagline_en;
+  document.getElementById('rs-hr').value=restSettings.hours;
+  document.getElementById('rs-ph').value=restSettings.phone;
+  document.getElementById('rs-ad').value=restSettings.address;
+  OM('m-restset');
+}
+
+function saveRestSet(){
+  restSettings.name=document.getElementById('rs-nm').value.trim()||'Шоми Лолагӣ';
+  restSettings.name_ru=document.getElementById('rs-nmru').value.trim()||restSettings.name;
+  restSettings.name_en=document.getElementById('rs-nmen').value.trim()||restSettings.name;
+  restSettings.tagline=document.getElementById('rs-tg').value.trim();
+  restSettings.tagline_ru=document.getElementById('rs-tgru').value.trim()||restSettings.tagline;
+  restSettings.tagline_en=document.getElementById('rs-tgen').value.trim()||restSettings.tagline;
+  restSettings.hours=document.getElementById('rs-hr').value.trim()||'10:00-23:00';
+  restSettings.phone=document.getElementById('rs-ph').value.trim();
+  restSettings.address=document.getElementById('rs-ad').value.trim();
+  CM('m-restset');
+  rAdmCats();
+  renderCustomer(curCat);
+  applyLang();
+  toast('💾 Матнҳои асосӣ сохта шуд!');
+}
+
+function restName(){
+  if(curLang==='ru')return restSettings.name_ru||restSettings.name;
+  if(curLang==='en')return restSettings.name_en||restSettings.name;
+  return restSettings.name;
+}
+function restTagline(){
+  if(curLang==='ru')return restSettings.tagline_ru||restSettings.tagline;
+  if(curLang==='en')return restSettings.tagline_en||restSettings.tagline;
+  return restSettings.tagline;
+}
+function saveCat(){
+  var em=document.getElementById('c-em').value||'🍽';
+  var nm=document.getElementById('c-nm').value.trim();
+  var nmru=document.getElementById('c-nmru').value.trim();
+  var nmen=document.getElementById('c-nmen').value.trim();
+  if(!nm){toast('❌ Ном!','r');return;}
+  if(window._editCatId){
+    var c=cats.find(function(x){return x.id===window._editCatId;});
+    if(c){
+      c.em=em;c.name=nm;c.name_ru=nmru;c.name_en=nmen;
+      if(tempCatPhoto)c.photo=tempCatPhoto;
+      toast('💾 Сохта шуд!');
+    }
+  } else {
+    cats.push({id:nid(),em:em,name:nm,name_ru:nmru,name_en:nmen,photo:tempCatPhoto});
+    toast('✅ '+em+' '+nm);
+  }
+  tempCatPhoto=null;window._editCatId=null;
+  CM('m-addcat');rAdmCats();renderCustomer(curCat);
+}
+function delCat(id){if(!confirm('Ҳазф?'))return;cats=cats.filter(function(c){return c.id!==id;});rAdmCats();renderCustomer(curCat);}
+
+function rAdmTbls(){
+  var s2c={free:'#052e16',occupied:'#3d0000',reserved:'#3d2b00'};
+  var s2b={free:'#22c55e',occupied:'#ef4444',reserved:'#f59e0b'};
+  var s2l={free:'🟢 Озод',occupied:'🔴 Банд',reserved:'🟡 Брон'};
+  var html='';
+  tables.forEach(function(t){
+    html+='<div onclick="cyT('+t.n+')" style="background:'+s2c[t.st]+'20;border:2px solid '+s2b[t.st]+';border-radius:9px;padding:9px;text-align:center;cursor:pointer">'
+      +'<div style="font-size:16px;font-weight:900">№'+t.n+'</div>'
+      +'<div style="color:#8b949e;font-size:9px">'+t.cap+'н</div>'
+      +'<div style="font-size:9px;font-weight:700;margin-top:3px;color:'+s2b[t.st]+'">'+s2l[t.st]+'</div></div>';
+  });
+  document.getElementById('t-grid').innerHTML=html;
+}
+function cyT(n){var t=tables.find(function(x){return x.n===n;});if(!t)return;var nx={free:'occupied',occupied:'reserved',reserved:'free'};t.st=nx[t.st];rAdmTbls();}
+function saveTbl(){var n=parseInt(document.getElementById('t-n').value);var cap=parseInt(document.getElementById('t-c').value)||4;if(!n){toast('❌','r');return;}if(tables.find(function(t){return t.n===n;})){toast('❌ Мавҷуд!','r');return;}tables.push({n:n,cap:cap,st:'free'});tables.sort(function(a,b){return a.n-b.n;});CM('m-addtbl');rAdmTbls();document.getElementById('t-n').value='';toast('✅');}
+
+function rAdmStaff(){
+  var rn={waiter:'🛎 Афитсиант',kitchen:'👨‍🍳 Ошпаз',cashier:'💰 Хазиначи',courier:'🚗 Курьер'};
+  var html='';
+  staffList.forEach(function(s){
+    html+='<tr><td style="font-weight:800">'+s.name+'</td><td>'+(rn[s.role]||s.role)+'</td>'
+      +'<td style="color:#8b949e">'+(s.login||'-')+'</td>'
+      +'<td><code style="background:#0d1117;padding:2px 5px;border-radius:4px;font-size:10px;color:#f5c518">'+(s.pass||'-')+'</code></td>'
+      +'<td style="color:#f5c518">'+s.sal.toLocaleString()+'</td>'
+      +'<td><button onclick="delStaff('+s.id+')" class="btn br bxs">🗑</button></td></tr>';
+  });
+  document.getElementById('s-tbl').innerHTML=html||'<tr><td colspan="6" style="text-align:center;color:#555;padding:12px">Нест</td></tr>';
+}
+function saveStaff(){
+  var nm=document.getElementById('s-nm').value.trim();
+  if(!nm){toast('❌','r');return;}
+  staffList.push({id:nid(),name:nm,role:document.getElementById('s-rl').value,
+    login:document.getElementById('s-lg').value,pass:document.getElementById('s-ps').value,
+    tg:document.getElementById('s-tg').value,sal:parseInt(document.getElementById('s-sl').value)||0});
+  CM('m-addstaff');rAdmStaff();
+  ['s-nm','s-lg','s-ps','s-tg','s-sl'].forEach(function(id){document.getElementById(id).value='';});
+  toast('✅');
+}
+function delStaff(id){if(!confirm('Ҳазф?'))return;staffList=staffList.filter(function(s){return s.id!==id;});rAdmStaff();}
+
+function rAdmPromos(){
+  var html='';
+  promosList.forEach(function(p){
+    html+='<tr><td><span style="background:#0d1117;border:1px solid #30363d;padding:2px 6px;border-radius:4px;font-family:monospace;color:#f5c518;font-size:11px">'+p.code+'</span></td>'
+      +'<td><b>'+p.disc+'%</b></td><td style="color:#8b949e">'+p.used+'</td>'
+      +'<td><span class="badge '+(p.active?'b-g':'b-gr')+'">'+(p.active?'✅':'❌')+'</span></td>'
+      +'<td style="display:flex;gap:3px"><button onclick="tgP('+p.id+')" class="btn '+(p.active?'br':'bgn')+' bxs">'+(p.active?'Бек':'Фа')+'</button><button onclick="dlP('+p.id+')" class="btn bgy bxs">🗑</button></td></tr>';
+  });
+  document.getElementById('p-tbl').innerHTML=html||'<tr><td colspan="5" style="text-align:center;color:#555;padding:12px">Нест</td></tr>';
+}
+function savePromo(){var cd=document.getElementById('p-cd').value.toUpperCase().trim();var dc=parseInt(document.getElementById('p-dc').value);if(!cd||!dc){toast('❌','r');return;}promosList.push({id:nid(),code:cd,disc:dc,used:0,active:true});CM('m-addpromo');rAdmPromos();document.getElementById('p-cd').value='';document.getElementById('p-dc').value='';toast('✅');}
+function tgP(id){var p=promosList.find(function(x){return x.id===id;});if(p){p.active=!p.active;rAdmPromos();}}
+function dlP(id){if(!confirm('Ҳазф?'))return;promosList=promosList.filter(function(p){return p.id!==id;});rAdmPromos();}
+
+function rAdmCards(){
+  var html='';
+  bankCards.forEach(function(c){
+    html+='<div style="background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:11px;padding:13px;margin-bottom:9px;border:1px solid #30363d">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">'
+      +'<div style="font-size:11px;color:#8b949e">🏦 '+c.bank+'</div>'
+      +'<div style="display:flex;gap:4px"><button onclick="edC('+c.id+')" class="btn bgy bxs">✏️</button><button onclick="dlC('+c.id+')" class="btn br bxs">🗑</button></div></div>'
+      +'<div style="font-family:monospace;font-size:15px;font-weight:900;color:#f5c518;letter-spacing:2px;margin-bottom:6px">'+c.num+'</div>'
+      +'<div style="font-size:10px;color:#e8e8e8">'+c.hold+'</div></div>';
+  });
+  document.getElementById('bc-list').innerHTML=html||'<div style="text-align:center;padding:25px;color:#555">Карта нест</div>';
+}
+function openAddCard(){document.getElementById('bc-id').value='0';['bc-bk','bc-nm','bc-hd'].forEach(function(id){document.getElementById(id).value='';});OM('m-addcard');}
+function edC(id){var c=bankCards.find(function(x){return x.id===id;});if(!c)return;document.getElementById('bc-id').value=c.id;document.getElementById('bc-bk').value=c.bank;document.getElementById('bc-nm').value=c.num;document.getElementById('bc-hd').value=c.hold;OM('m-addcard');}
+function saveCard(){var id=parseInt(document.getElementById('bc-id').value);var bk=document.getElementById('bc-bk').value.trim();var nm=document.getElementById('bc-nm').value.trim();var hd=document.getElementById('bc-hd').value.trim();if(!bk||!nm||!hd){toast('❌','r');return;}if(id===0){bankCards.push({id:nid(),bank:bk,num:nm,hold:hd});}else{var c=bankCards.find(function(x){return x.id===id;});if(c){c.bank=bk;c.num=nm;c.hold=hd;}}CM('m-addcard');rAdmCards();toast('✅');}
+function dlC(id){if(bankCards.length<=1){toast('❌ Як карта бошад!','r');return;}if(!confirm('Ҳазф?'))return;bankCards=bankCards.filter(function(c){return c.id!==id;});rAdmCards();}
+
+// AUTO REFRESH
+setInterval(function(){
+  if(currentRole==='kitchen')renderKitchen();
+  else if(currentRole==='waiter')renderWaiter();
+  else if(currentRole==='cashier')renderCashier();
+  else if(currentRole==='courier')renderCourier();
+  else if(currentRole==='admin')rAdmDash();
+},5000);
+
+// SOUND NOTIFICATION
+var lastOrderId=ordCnt;
+function checkNewOrders(){
+  var maxId=orders.length>0?Math.max.apply(null,orders.map(function(o){return o.id;})):ordCnt;
+  if(maxId>lastOrderId && ['kitchen','waiter','cashier','courier'].includes(currentRole)){
+    // Beep
+    try{
+      var ctx=new (window.AudioContext||window.webkitAudioContext)();
+      var osc=ctx.createOscillator();
+      var gain=ctx.createGain();
+      osc.connect(gain);gain.connect(ctx.destination);
+      osc.frequency.value=800;osc.type='sine';
+      gain.gain.setValueAtTime(0.3,ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.3);
+      osc.start(ctx.currentTime);osc.stop(ctx.currentTime+0.3);
+    }catch(e){}
+    toast('🔔 Заказ нав омад: №'+maxId,'g');
+  }
+  lastOrderId=maxId;
+}
+setInterval(checkNewOrders,2000);
+
+// CLEAR HISTORY - admin only (daily reset)
+function clearHistory(){
+  if(!confirm('Ҳамаи историяро тоза карданӣ ҳастед? Заказҳои тамомшуда нест мешаванд!'))return;
+  orders=orders.filter(function(o){return o.status!=='delivered'||!o.paid;});
+  rAdmAll();
+  toast('🗑 История тоза шуд!','g');
+}
+
+// INIT
+window.onload=function(){
+  SP('customer');
+  renderCustomer();
+  applyLang();
+};
+
+</script>
+</body>
+</html>
